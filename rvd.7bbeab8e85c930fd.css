@@ -1,0 +1,1643 @@
+:root {
+    /*--logo-url: url("../images/visual-designer-logo.png");*/
+    --background-color: #ffffff;
+    /* for various types of backgrounds like header, verb etc.*/
+    --text-color: #5b6170;
+    --aux-back-color: #f1f1f1;
+    /* for the grey background, hovered entries in menues, background in input-groups */
+    --primary-color: #44A5AB;
+    /* for verbs and step headings, tat background, primary buttons. That's blue by default */
+    --secondary-color: #E63828;
+    --global-font: lato;
+    --warning-color: orange;
+    --primary-text-color: #ffffff;
+    --primary-back-color: var(--primary-color);
+    --border-color: #ccc;
+    --lines-color: #eee;
+    --verb-text-color: var(--background-color);
+    /* verb toolbox */
+    --verb-back-color: var(--primary-back-color);
+    --default-button-back-color: #B8BBC1;
+    --default-button-text-color: #434A5B;
+    --primary-button-back-color: var(--primary-back-color);
+    --primary-button-text-color: var(--primary-text-color);
+    --danger-button-back-color: #B8BBC1;
+    --danger-button-text-color: #434A5B;
+    --secondary-button-back-color: #0D313A;
+    /* sth like important buttons that are not to primary because we got too much light blue */
+    --secondary-button-text-color: var(--primary-text-color);
+    --disabled-button-back-color: var(--default-button-back-color);
+    --button-radius: 4px;
+    --steplisting-back-color: var(--background-color);
+    /* controls i.e input, textarea etc. */
+    --control-back-color: var(--background-color);
+    --control-text-color: var(--text-color);
+    --control-back-color-disabled: var(--aux-back-color);
+    /* input-groups */
+    --input-group-text-color: var(--text-color);
+    --input-group-back-color: var(--aux-back-color);
+    --input-group-border-color: var(--border-color);
+    /* step properties */
+    --step-background-color: var(--background-color);
+    --step-heading-text-color: var(--verb-text-color);
+    --step-text-color: var(--text-color);
+    /* free text and titles inside steps except for controls */
+    --step-heading-back-color: var(--verb-back-color);
+    /* headings */
+    --heading-font: var(--global-font);
+    /* dropdowns */
+    --dropdown-text-color: var(--text-color);
+    --dropdown-back-color: var(--background-color);
+    --dropdown-hover-back-color: var(--aux-back-color);
+    --dropdown-font-size: 14px;
+    /* modals */
+    --modal-back-color: var(--background-color);
+    --modal-text-color: var(--text-color);
+    /* links */
+    --link-text-color: #44A5AB;
+    /* Text/Color for links */
+    /* misc */
+    --selected-tab-back-color: var(--primary-back-color);
+    --selected-tab-text-color: var(--verb-text-color);
+    --sortable-band-placeholder-color: var(--secondary-button-back-color);
+    /* color of the band that appears when dropping a verb on the module */
+    --default-shadow-color: rgba(0, 0, 0, 0.175);
+    /* dropdowns, modals */
+    --comment-color: #999;
+    /* help-blocks color */
+    --drop-area-color: var(--background-color);
+    --drop-area-border-color: var(--default-button-back-color);
+    --danger-hint-color: #E63828;
+    --graph-back-color: var(--background-color);
+    --placeholder-text-color: #c1c4c5;
+    --takeatour-bg-color: var(--primary-color);
+    --takeatour-text-color: white;
+}
+
+
+/* html hidding while Bootstrapping */
+
+html.still-loading {
+    display: none;
+}
+
+body {
+    font-family: var(--global-font);
+    font-size: 15px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: var(--heading-font);
+}
+
+.main.container {
+    min-height: 500px;
+}
+
+.state-designer .main.container-fluid,
+.state-designer .graph-wrap .row {
+    /* mostly for the Diagram background color*/
+    background-color: var(--aux-back-color);
+}
+
+.state-designer .graph-wrap .row {
+    margin-top: 38px;
+}
+
+
+/*** header ***/
+
+.rvd-header {
+    background-color: var(--aux-back-color);
+    position: relative;
+    padding-bottom: 38px;
+}
+
+.state-designer .rvd-header {
+    /* when the verbs are shown the header needs to be little thinner to accomodate for the designer menu */
+    padding-bottom: 0px;
+}
+
+.logo {
+    background: no-repeat left center var(--logo-url);
+    background-size: contain;
+    /*background: no-repeat left center var(--logo-url), center no-repeat url(/visual-designer/images/logo-suffix.png);
+    background-size: contain, 40% auto;*/
+    height: 40px;
+    width: 300px;
+    display: block;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.vd-title {
+    position: absolute;
+    z-index: 1;
+    font-size: 1.2em;
+    margin-left: 13px;
+    top: 100%;
+    margin-top: 5px;
+}
+
+
+/*** notifications ***/
+
+.notifications-wrapper {
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 2000;
+    top: 0;
+}
+
+.alert.rvd-notification.neutral-notification {
+    border-radius: 0px;
+    text-align: center;
+    color: var(--contrast-color);
+    background-color: var(--danger-button-back-color);
+}
+
+
+/*** footer ***/
+
+.footer {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    box-shadow: 1px -2px 1px rgba(219, 219, 219, 1);
+    background: #eeeeee;
+    margin-top: 30px;
+}
+
+#telestax-footer {
+    margin-top: 20px;
+    margin-left: 90px;
+}
+
+.telestax-rights {
+    color: #a3a3a3;
+    width: 244px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: -7px;
+    /* font-family: lato; */
+}
+
+#facebook {
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+}
+
+#twitter {
+    margin-top: 22px;
+    margin-right: 20px;
+    float: right;
+}
+
+#linkedin {
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+}
+
+#googleplus {
+    margin-top: 20px;
+    margin-right: 15px;
+    float: right;
+}
+
+#youtube {
+    margin-top: 20px;
+    margin-right: 90px;
+    float: right;
+}
+
+
+/*** Common styles ***/
+
+
+/* assign besides col-* to add some space under the column block */
+
+
+/*::selection {
+  background: purple;*/
+
+
+/* color for when text is selected
+}*/
+
+.form-control::placeholder {
+    color: var(--placeholder-text-color);
+}
+
+.col-margined {
+    margin-bottom: 5px;
+}
+
+a.rvd-link,
+.rvd-link.btn-link {
+    color: var(--link-text-color);
+}
+
+.rvd-link.btn-link:focus,
+.rvd-link.btn-link:hover {
+    color: var(--link-text-color);
+}
+
+.btn-link,
+.btn-link:focus {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.btn-link:hover {
+    text-decoration: none;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.btn-link:first-child {
+    padding-left: 0;
+}
+
+.btn {
+    font-size: 15px;
+}
+
+.btn-xs {
+    font-size: 12px;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus:active,
+.btn-primary:active:hover,
+.btn-primary:focus,
+.rvd-clickable.btn-primary {
+    color: var(--primary-button-text-color);
+    background-color: var(--primary-button-back-color);
+    border-color: var(--primary-button-back-color);
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.btn-default:focus:active,
+.btn-default.active:focus,
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open>.dropdown-toggle.btn-default,
+.open>.dropdown-toggle.btn-default:hover,
+.open>.dropdown-toggle.btn-default:focus,
+.open>.dropdown-toggle.btn-default:active:hover,
+.open>.dropdown-toggle.btn-default:focus:active,
+.rvd-clickable.btn-default {
+    color: var(--default-button-text-color);
+    background-color: var(--default-button-back-color);
+    border-color: var(--default-button-back-color);
+}
+
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:focus:active,
+.btn-danger:active:hover,
+.btn-danger:focus,
+.rvd-clickable.btn-danger {
+    color: var(--danger-button-text-color);
+    background-color: var(--danger-button-back-color);
+    border-color: var(--danger-button-back-color);
+}
+
+.btn-primary:hover,
+.btn-default:hover,
+.btn-danger:hover {
+    opacity: 0.8;
+}
+
+.btn-secondary,
+.btn-secondary:focus:active,
+.btn-secondary:active:hover,
+.btn-secondary:focus,
+.rvd-clickable.btn-secondary {
+    background-color: var(--secondary-button-back-color);
+    border-color: var(--secondary-button-back-color);
+    color: var(--secondary-button-text-color);
+}
+
+.btn-secondary:hover {
+    /*-webkit-filter: brightness(120%);
+  filter: brightness(120%);*/
+    opacity: 0.8;
+    color: var(--secondary-button-text-color);
+}
+
+
+/*.btn-secondary:hover:disabled, .btn-secondary:disabled {
+  background-color: var(--disabled-button-back-color);
+  border-color: var(--disabled-button-back-color);
+  opacity: 0.8;
+}*/
+
+.btn {
+    border-radius: var(--button-radius);
+}
+
+label {
+    font-weight: normal;
+}
+
+.validation-error,
+.error-message,
+.validation-warning {
+    font-size: 85%;
+    color: var(--danger-hint-color);
+    font-style: italic;
+}
+
+a.muted {
+    color: #727272;
+}
+
+a.muted:hover {
+    color: #ff692f;
+}
+
+a.muted.active {
+    color: #ff692f;
+}
+
+a.disabled {
+    color: var(--comment-color);
+    cursor: not-allowed;
+}
+
+.nav>li>a.muted:hover {
+    background-color: #e5e5e5;
+}
+
+label.rvd-label {
+    /* font-family: lato; */
+    color: #45a5ab;
+    font-weight: 300;
+}
+
+.dropdown-menu.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    right: 0;
+    left: inherit;
+}
+
+.separator {
+    min-height: 60px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #BBBBBB;
+}
+
+.separator-active {
+    background-color: #D9EDF7;
+    /*height: 20px;*/
+}
+
+
+/* rvdDropdown control (at least) */
+
+.input-group-btn:not(:first-child)>.btn {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.input-group-btn:not(:last-child)>.btn {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+
+/* global formatting */
+
+.rvd-spacer5 {
+    height: 5px;
+}
+
+.rvd-spacer10 {
+    height: 10px;
+}
+
+.rvd-spacer20 {
+    height: 20px;
+}
+
+.rvd-spacer30 {
+    height: 30px;
+}
+
+.rvd-spacer40 {
+    height: 40px;
+}
+
+.rvd-spacer50 {
+    height: 50px;
+}
+
+
+/************************
+  V I E W S
+************************/
+
+
+/*** login view ***/
+
+#login-form .slick-input {
+    margin-bottom: 30px;
+}
+
+#login-form .btn+.btn {
+    margin-left: 5px;
+}
+
+h3.section-title {
+    font-size: 30px;
+    font-weight: 300;
+    /* font-family: lato; */
+    color: #6d6e70;
+}
+
+input.slick-input {
+    /*color: #6d6e70;
+    background: #fafafa;*/
+    border: none;
+    border-bottom: 2px solid #45a5ab;
+    padding-bottom: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    /* font-family: lato; */
+    font-weight: 300;
+}
+
+
+/*** Log view ***/
+
+#rvd-log-textarea {
+    min-height: 300px;
+}
+
+.log-view {
+    margin-bottom: 20px;
+}
+
+.log-view .empty-log,
+.log-view .no-logging {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--comment-color);
+}
+
+.log-view .message {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.log-view .empty-log i,
+.log-view .no-logging i {
+    font-size: 5em;
+}
+
+.log-view .delete-confirmation .question {
+    margin-right: 22px;
+}
+
+.log-view .delete-confirmation {
+    margin-left: 10px;
+}
+
+.log-view .delete-confirmation .cancel-button {
+    margin-left: 17px;
+}
+
+
+/******************
+ D E S I G N E R
+******************/
+
+.rvd-designer .drop-area {
+    border-radius: 10px;
+}
+
+.rvd-designer .drop-area .drop-prompt {
+    margin: 20px 0;
+}
+
+.rvd-designer .drop-area .drop-prompt a {
+    color: var(--text-color);
+}
+
+.rvd-subheader-message {
+    margin-left: 10px;
+}
+
+.rvd-designer .no-modules-warning {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.rvd-node {
+    padding-top: 10px;
+}
+
+.more-audio-resources {
+    margin-top: 10px;
+}
+
+
+/* column height equality */
+
+.row.is-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* FS-157: Safari displays the before and after pseud-elements as real elements causing it to overflow, this fixes it */
+
+.row.is-flex:after,
+.row.is-flex:before {
+    content: initial;
+}
+
+.row.is-flex>[class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Module tabs */
+
+.module-tabs.nav-tabs {
+    border-bottom: 1px solid var(--lines-color);
+}
+
+.nav-tabs>li>span.navtab {
+    /*border: 1px solid transparent;*/
+    border-radius: 4px 4px 0 0;
+    line-height: 1.42857;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+.nav>li>span.navtab {
+    display: block;
+    padding: 4px 12px;
+    position: relative;
+}
+
+.nav-tabs>li>span.navtab:hover {
+    border-color: #eeeeee #eeeeee #dddddd;
+}
+
+.nav-tabs>li.active>span.navtab,
+.nav-tabs>li.active>span.navtab:hover,
+.nav-tabs>li.active>span.navtab:focus {
+    color: var(--selected-tab-text-color);
+    cursor: default;
+    background-color: var(--selected-tab-back-color);
+    border: 1px solid var(--selected-tab-back-color);
+    ;
+    border-bottom-color: transparent;
+    font-weight: bold;
+}
+
+.nav>li>span.navtab:hover,
+.nav>li>span.navtab:focus {
+    text-decoration: none;
+    background-color: var(--aux-back-color);
+}
+
+.navtab input {
+    background-color: var(--control-back-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: var(--control-text-color);
+    font-size: 12px;
+    line-height: 1.42857;
+    padding: 2px 7px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    vertical-align: middle;
+}
+
+
+/*** Verb toolbox ***/
+
+.verb-toolbox {
+    background-color: var(--aux-back-color);
+    padding: 50px 20px 23px 23px;
+}
+
+.verb-button {
+    color: var(--verb-text-color);
+    background-color: var(--verb-back-color);
+    z-index: 1;
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    padding: 8px;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.verb-button:hover {
+    background-color: var(--verb-back-color);
+    color: var(--verb-text-color);
+    opacity: 1.0;
+}
+
+
+/*** Step listing ***/
+
+.step {
+    background-color: var(--step-background-color);
+}
+
+.steplisting {
+    min-height: 580px;
+    background-color: var(--steplisting-back-color);
+}
+
+.module-tab .navtab {
+    color: var(--text-color);
+}
+
+.module-tab .module-tab-label {
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.module-tab.active .module-tab-label {
+    color: var(--verb-text-color);
+}
+
+.module-menu-area.row {
+    background-color: var(--aux-back-color);
+    margin-bottom: 16px;
+    padding-bottom: 15px;
+}
+
+.steplisting .panel-heading {
+    padding: 5px 10px;
+}
+
+.steplisting .nav>li>a {
+    padding: 7px 15px;
+    margin-right: 5px;
+}
+
+.steplisting .nav .caret {
+    border-top-color: white;
+}
+
+
+/*********************
+ C O M P O N E N T S
+*********************/
+
+
+/*** drop area ***/
+
+.drop-area-image {
+    min-height: 36px;
+    background-image: url('../images/plus-small.png');
+    opacity: 0.6;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px dashed var(--default-button-color);
+}
+
+.drop-area .drop-prompt {
+    padding: 7px;
+    opacity: 0.6;
+}
+
+.drop-area.dropping {
+    background-color: beige;
+    cursor: copy;
+}
+
+.drop-area {
+    background: none repeat scroll 0% 0% var(--drop-area-color);
+    border: 5px dashed var(--drop-area-border-color);
+    text-align: center;
+}
+
+
+/*** Menus & Top menu ***/
+
+.dropdown>button {
+    font-size: 16px;
+}
+
+.dropdown .dropdown-menu li a {
+    color: var(--dropdown-text-color);
+    font-size: var(--dropdown-font-size);
+}
+
+.dropdown-menu {
+    border: 1px solid var(--border-color);
+}
+
+.project-menu {
+    margin-top: 26px;
+    margin-right: 30px;
+}
+
+.project-menu li a {
+    margin-left: 12px;
+}
+
+.project-menu>.project-menu-button {
+    font-size: 16px;
+}
+
+.project-menu-username {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.project-menu .doc-link {
+    margin-right: 25px;
+}
+
+
+/*** Graph ***/
+
+.graph {
+    background-color: var(--graph-back-color);
+    border: 1px solid #D3D3D3;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+#paper {
+    padding: 20px;
+    /*display: inline-block;*/
+    overflow: hidden;
+}
+
+#paperContainer {}
+
+.graph .graph-controls {
+    position: absolute;
+    right: 20px;
+    /* after upgrading joint.js to 0.99 control buttons became unclickable, using z-index to fix this */
+    z-index: 1;
+}
+
+.connection-wrap,
+.link-tool,
+.link-tools {
+    display: none;
+}
+
+.marker-arrowhead {
+    display: none
+}
+
+.marker-vertices {
+    display: none
+}
+
+.ng-invalid.form-control:focus {
+    border-color: rgba(255, 0, 0, 0.6);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 0, 0, 0.6)
+}
+
+.ng-invalid.form-control.warn-unfocused {
+    border-color: rgba(255, 0, 0, 0.6);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 0, 0, 0.6)
+}
+
+.navbar-rvd-centered {
+    float: none;
+    text-align: center;
+}
+
+.rvd-clickable {
+    cursor: pointer;
+    /* opacity: 0.6 */
+}
+
+.rvd-clickable.rvd-link {
+    color: var(--link-text-color);
+}
+
+.rvd-clickable-text {
+    cursor: pointer;
+}
+
+.rvd-clickable-text:hover {
+    opacity: 1.0;
+}
+
+.rvd-pickable {
+    cursor: move;
+}
+
+.rvd-clickable:hover {
+    opacity: 0.6;
+}
+
+.rvd-handle {
+    cursor: move;
+}
+
+.rvd-active {
+    color: rgb(66, 139, 202);
+    opacity: 1.0;
+}
+
+
+/*************
+ S T E P S
+*************/
+
+
+/*** step generic stuff ***/
+
+.step .help-block {
+    margin-bottom: 5px;
+}
+
+
+/* disable red border for 'masked-invalid' inputs. It's handy for some cases */
+
+.mask-invalid.ng-invalid.form-control:focus {
+    border-color: #66afe9;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.step-list {
+    min-height: 500px;
+}
+
+.step.panel {
+    margin-bottom: 5px;
+}
+
+.step-warning-icon {
+    margin-left: 10px;
+    color: var(--warning-color);
+}
+
+.step .panel-heading {
+    color: var(--step-heading-text-color);
+    background-color: var(--step-heading-back-color);
+}
+
+.step .panel-body {
+    color: var(--step-text-color);
+    font-size: 15px;
+}
+
+
+/* dial step*/
+
+.dial-step .drop-area {
+    padding: 10px;
+}
+
+.dial-step .noun-toolbox {
+    margin-left: 10px;
+}
+
+.dial-noun {
+    background-color: var(--verb-back-color);
+    color: var(--verb-text-color);
+}
+
+
+/* say step */
+
+.say-language-dropdown {
+    max-width: 250px;
+}
+
+.say-step .language {
+    width: 250px;
+    margin-right: 20px;
+}
+
+.say-step .voice {
+    margin-right: 20px;
+}
+
+.say-step .loop,
+.play-step .loop {
+    width: 250px;
+}
+
+.say-step .step-options {
+    width: 304px;
+}
+
+
+/*** control-step  ***/
+
+.step.control-step .conditions {
+    border-right-width: 1px;
+    border-right-style: inset;
+}
+
+.control-step .condition,
+.control-step .action {
+    margin-bottom: 10px;
+}
+
+.control-step .action .reorder-buttons {
+    margin-right: 5px;
+}
+
+.control-step .trailing-buttons-wrap {
+    text-align: right;
+}
+
+.control-step .action-capture .form-group.regex-field,
+.control-step .action-capture .form-group.data-field {
+    width: 49%;
+}
+
+.control-step .action-capture .form-group.regex-field input {
+    width: 100%;
+}
+
+.control-step .condition .type-chooser {
+    margin-left: 5px;
+}
+
+.control-step .form-group.operand {
+    vertical-align: top;
+}
+
+
+/*** record-step ***/
+
+
+/* 'fok stands for finish-on-key */
+
+.fok .form-group {
+    margin-bottom: 15px;
+}
+
+.fok .fok-mode.form-group {
+    width: 50%;
+}
+
+
+/*** external service step ***/
+
+value-extractor .btn.pull-right {
+    margin-left: 5px;
+}
+
+.assignment .remove-button,
+.route-mapping .remove-button {
+    margin-top: 7px;
+}
+
+.service-url-wrap {
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.rvd-disabled {
+    opacity: 0.5;
+}
+
+
+/* a fix for displaying small <select>s inside input groups */
+
+.routing-decision-controls.input-group-sm .height-fix {
+    height: 32px;
+}
+
+.wellinfo-rollup {
+    text-align: right;
+}
+
+
+/*** gather step ***/
+
+.nested-steps {
+    min-height: 50px;
+}
+
+
+/*** dial step ***/
+
+.conference-noun .noun-advanced,
+.client-noun .noun-advanced,
+.number-noun .noun-advanced,
+.sipuri-noun .noun-advanced {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+
+/*** ussd collect step ***/
+
+.target-mapping .close {
+    margin-right: 12px;
+}
+
+
+/*********************
+ D I R E C T I V E S
+*********************/
+
+
+/* variable definition directive */
+
+vardef .vardef,
+option-input .option-input {
+    position: relative;
+}
+
+vardef .dropdown {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+vardef .vardef-input {
+    padding-right: 50px;
+    padding-left: 25px;
+}
+
+vardef .assign-arrow {
+    position: absolute;
+    top: 11px;
+    left: 8px;
+}
+
+.vardef .var-scope {
+    display: inline;
+    padding: 0;
+    font-size: smaller;
+}
+
+.option-input {
+    display: inline-block;
+}
+
+.option-input .dropdown {
+    position: absolute;
+    left: 12px;
+    top: 0px;
+}
+
+.option-input .dropdown>small {
+    overflow: hidden;
+    width: 100px;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding-right: 0;
+    font-weight: bold;
+    position: relative;
+}
+
+.option-input input {
+    padding-left: 112px;
+}
+
+.option-input -fa-caret-down {
+    text-align: right;
+    right: 11px;
+    position: absolute;
+    top: 10px;
+}
+
+
+/*** module-url-picker directive ***/
+
+.module-url-picker {
+    position: relative;
+}
+
+.module-url-picker input.back-input {
+    background-color: var(--control-back-color);
+}
+
+.module-url-picker .picker-type {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.module-url-picker .module-list {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.input-group.input-group-sm .module-url-picker .picker-type,
+.input-group.input-group-sm .module-url-picker .module-list {
+    top: 5px;
+}
+
+.input-group.input-group-sm .module-url-picker .module-list .dropdown-toggle {
+    font-size: 12px;
+}
+
+.module-url-picker .picker-type .dropdown-toggle.switcher-inactive {
+    color: #999;
+}
+
+.input-group module-url-picker:not(:first-child) input.form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group module-url-picker:last-child input.form-control {
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+}
+
+.input-group.input-group-sm .module-url-picker input.form-control {
+    height: 30px;
+    font-size: 12px;
+}
+
+
+/*** type-chooser directive ***/
+
+.type-chooser .chosen-label {
+    color: #999;
+}
+
+
+/*** fac directive ***/
+
+.fac-warning-wrap {
+    position: relative;
+}
+
+.fac-warning {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    z-index: 5;
+}
+
+.fac-warning-serious {
+    color: #E63828;
+}
+
+.fac-warning-mild {
+    color: orange;
+}
+
+.fac-warning .tooltip,
+.fac-warning-icon .tooltip {
+    width: 150px;
+    /* for some reason the tooltips of a fac appear as thin as possible */
+}
+
+
+/*** variable-lookup directive ***/
+
+.input-group-btn.variable-lookup:not(:first-child):not(:last-child) button {
+    border-radius: 0;
+}
+
+.input-group-btn.variable-lookup:not(:first-child):last-child button {
+    border-radius: 0 4px 4px;
+}
+
+
+/*************
+ M O D A L S
+*************/
+
+
+/*** Parameters modal ***/
+
+.parameters .no-parameters {
+    color: #737373;
+    padding: 25px;
+    text-align: center;
+}
+
+.no-parameters .no-parameters-icon {
+    font-size: 85px;
+    margin-bottom: 20px;
+}
+
+#show-advanced {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+
+/*** Web Trigger modal ***/
+
+.web-trigger .modal-body {
+    padding-bottom: 1px;
+}
+
+.modal-body:not(:first-child) {
+    padding-top: 0;
+}
+
+
+/*** Project Settings modal ***/
+
+.project-settings-modal .help-block {
+    font-size: 0.9em;
+}
+
+
+/*******************
+ U N S O R T E D
+*******************/
+
+.help-tooltip {
+    cursor: help;
+}
+
+
+/* make draggable .label's occupy some space when dragged onto to sortables */
+
+.label.ui-sortable-placeholder:empty {
+    display: inline;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.sortable-placeholder {
+    height: 20px;
+    width: 100px;
+}
+
+
+/* all rvd-alerts will be drawn relatively to this element (???)*/
+
+.alert-container {
+    position: relative
+}
+
+.rvd-panel {
+    border: 1px solid #d0d0d0;
+}
+
+.rvd-panel .panel-heading {
+    background-color: #f0f0f0;
+}
+
+.ussd-letter-counter {
+    margin-bottom: 13px;
+    margin-left: 8px;
+}
+
+
+/*
+
+CSS terms
+----------
+
+verb: the draggable button of the toolbox on the left
+step: the panel that contains the verb details
+
+*/
+
+
+/*********
+ M I S C
+*********/
+
+
+/*** bootstrap customizations ***/
+
+.form-control {
+    color: var(--control-text-color);
+    background-color: var(--control-back-color);
+    border: 1px solid var(--border-color);
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+    background-color: var(--control-back-color-disabled);
+}
+
+.form-control,
+.panel {
+    box-shadow: none;
+}
+
+.input-group-addon {
+    color: var(--input-group-text-color);
+    background-color: var(--input-group-back-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+}
+
+.modal-content {
+    color: var(--modal-text-color);
+    background-color: var(--modal-back-color);
+    box-shadow: 0 5px 15px var(--default-shadow-color);
+}
+
+.panel-default {
+    border-color: var(--border-color);
+}
+
+.input-group-addon,
+.input-group select,
+.input-group input {
+    border: none;
+}
+
+.input-group {
+    border: 1px solid var(--input-group-border-color);
+    border-radius: 3px;
+}
+
+hr {
+    border-top: 1px solid var(--lines-color);
+    opacity: 0.4;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--lines-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--lines-color);
+}
+
+.help-block {
+    color: var(--comment-color);
+}
+
+code {
+    color: inherit;
+    background-color: var(--aux-back-color);
+}
+
+.text-muted {
+    color: var(--comment-color);
+}
+
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+    color: var(--comment-color);
+}
+
+.dropdown-header {
+    color: var(--comment-color);
+}
+
+.panel-default>.panel-heading {
+    border-color: inherit;
+}
+
+.dropdown-menu .divider {
+    background-color: var(--lines-color);
+}
+
+.dropdown .btn-link {
+    color: var(--text-color);
+}
+
+.dropdown-menu>li>a.disabled {
+    color: var(--comment-color);
+}
+
+
+/* replace 'btn' bootstap class for components that should look like btn */
+
+.rvd-btn-look {
+    font-size: 15px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Bootstrap extension for having a lot of stuff on nav-tabs */
+
+textarea.medium {
+    height: 150px;
+}
+
+.form-control.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+a {
+    color: var(--link-text-color);
+}
+
+a:hover {
+    color: var(--link-text-color);
+    opacity: 0.8;
+}
+
+ul.dropdown-menu {
+    color: var(--dropdown-text-color);
+    background-color: var(--dropdown-back-color);
+}
+
+.dropdown-menu {
+    box-shadow: 0 6px 12px var(--default-shadow-color);
+}
+
+ul.dropdown-menu li a {
+    color: var(--dropdown-text-color);
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--dropdown-hover-back-color);
+    color: var(--dropdown-text-color);
+}
+
+
+/*** jquery-ui customizations ***/
+
+
+/* sortable blue band placeholder styling */
+
+.ui-sortable .ui-state-highlight {
+    border: 1px solid var(--sortable-band-placeholder-color);
+    background: var(--sortable-band-placeholder-color);
+    border-radius: 5px;
+    color: var(--sortable-band-placeholder-color);
+    height: 10px;
+    margin-bottom: 5px;
+}
+
+
+/* Take-a-tour */
+
+.tour-popover.popover {
+    background-color: var(--takeatour-bg-color);
+    color: var(--takeatour-text-color);
+    border-radius: 4px;
+    max-width: 350px;
+    min-width: 280px;
+}
+
+.tour-popover .ts-body {
+    margin-bottom: 15px;
+}
+
+.tour-popover .ts-nav {
+    text-align: right;
+}
+
+.tour-popover .popover-content {
+    padding: 27px;
+    position: relative;
+    font-size: 1.2em;
+    padding-bottom: 24px;
+}
+
+.tour-popover .popover-content .ts-body a {
+    color: var(--takeatour-text-color);
+    text-decoration: underline;
+}
+
+.tour-popover .ts-nav .btn {
+    background-color: #26395d;
+    border-color: #26395d;
+    border-radius: 2px;
+    color: white;
+    padding: 6px 20px;
+    margin-left: 10px;
+}
+
+.tour-popover .ts-heading .close-button {
+    position: absolute;
+    top: 6px;
+    right: 11px;
+    color: white;
+}
+
+.tour-popover .ts-heading .close-button:hover {
+    opacity: 0.7;
+}
+
+.tour-popover.top>.arrow:after {
+    border-top-color: var(--takeatour-bg-color);
+}
+
+.tour-popover.bottom>.arrow:after {
+    border-bottom-color: var(--takeatour-bg-color);
+}
+
+.tour-popover.left>.arrow:after {
+    border-left-color: var(--takeatour-bg-color);
+}
+
+.tour-popover.right>.arrow:after {
+    border-right-color: var(--takeatour-bg-color);
+}
+
+[uib-popover-template-popup].popover.tour-popover {
+    z-index: 1000;
+    /*width: 300px;*/
+}
+
+
+/* backdrop feature (grey out all screen but an element) */
+
+.backdrop-effect {
+    position: relative;
+}
+
+.backdrop-area {
+    display: none;
+}
+
+.backdrop-enable {
+    display: block;
+    position: absolute;
+    background-color: black;
+    z-index: 1000;
+    opacity: 0.2;
+}
+
+.backdrop-top.backdrop-enable {
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.backdrop-bottom.backdrop-enable {
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+}
+
+.backdrop-left.backdrop-enable {
+    left: 0px;
+}
+
+.backdrop-right.backdrop-enable {
+    right: 0px;
+}

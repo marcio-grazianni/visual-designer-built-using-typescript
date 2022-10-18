@@ -1,0 +1,814 @@
+<html ng-controller="AppCtrl" class="ng-scope">
+
+<head>
+    <style type="text/css">
+        [uib-typeahead-popup].dropdown-menu {
+            display: block;
+        }
+    </style>
+    <style type="text/css">
+        .uib-time input {
+            width: 50px;
+        }
+    </style>
+    <style type="text/css">
+        [uib-tooltip-popup].tooltip.top-left>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.top-right>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.bottom-left>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.bottom-right>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.left-top>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.left-bottom>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.right-top>.tooltip-arrow,
+        [uib-tooltip-popup].tooltip.right-bottom>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.top-left>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.top-right>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.bottom-left>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.bottom-right>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.left-top>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.left-bottom>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.right-top>.tooltip-arrow,
+        [uib-tooltip-html-popup].tooltip.right-bottom>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.top-left>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.top-right>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.bottom-left>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.bottom-right>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.left-top>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.left-bottom>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.right-top>.tooltip-arrow,
+        [uib-tooltip-template-popup].tooltip.right-bottom>.tooltip-arrow,
+        [uib-popover-popup].popover.top-left>.arrow,
+        [uib-popover-popup].popover.top-right>.arrow,
+        [uib-popover-popup].popover.bottom-left>.arrow,
+        [uib-popover-popup].popover.bottom-right>.arrow,
+        [uib-popover-popup].popover.left-top>.arrow,
+        [uib-popover-popup].popover.left-bottom>.arrow,
+        [uib-popover-popup].popover.right-top>.arrow,
+        [uib-popover-popup].popover.right-bottom>.arrow,
+        [uib-popover-html-popup].popover.top-left>.arrow,
+        [uib-popover-html-popup].popover.top-right>.arrow,
+        [uib-popover-html-popup].popover.bottom-left>.arrow,
+        [uib-popover-html-popup].popover.bottom-right>.arrow,
+        [uib-popover-html-popup].popover.left-top>.arrow,
+        [uib-popover-html-popup].popover.left-bottom>.arrow,
+        [uib-popover-html-popup].popover.right-top>.arrow,
+        [uib-popover-html-popup].popover.right-bottom>.arrow,
+        [uib-popover-template-popup].popover.top-left>.arrow,
+        [uib-popover-template-popup].popover.top-right>.arrow,
+        [uib-popover-template-popup].popover.bottom-left>.arrow,
+        [uib-popover-template-popup].popover.bottom-right>.arrow,
+        [uib-popover-template-popup].popover.left-top>.arrow,
+        [uib-popover-template-popup].popover.left-bottom>.arrow,
+        [uib-popover-template-popup].popover.right-top>.arrow,
+        [uib-popover-template-popup].popover.right-bottom>.arrow {
+            top: auto;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            margin: 0;
+        }
+        
+        [uib-popover-popup].popover,
+        [uib-popover-html-popup].popover,
+        [uib-popover-template-popup].popover {
+            display: block !important;
+        }
+    </style>
+    <style type="text/css">
+        .uib-datepicker-popup.dropdown-menu {
+            display: block;
+            float: none;
+            margin: 0;
+        }
+        
+        .uib-button-bar {
+            padding: 10px 9px 2px;
+        }
+    </style>
+    <style type="text/css">
+        .uib-position-measure {
+            display: block !important;
+            visibility: hidden !important;
+            position: absolute !important;
+            top: -9999px !important;
+            left: -9999px !important;
+        }
+        
+        .uib-position-scrollbar-measure {
+            position: absolute !important;
+            top: -9999px !important;
+            width: 50px !important;
+            height: 50px !important;
+            overflow: scroll !important;
+        }
+        
+        .uib-position-body-scrollbar-measure {
+            overflow: scroll !important;
+        }
+    </style>
+    <style type="text/css">
+        .uib-datepicker .uib-title {
+            width: 100%;
+        }
+        
+        .uib-day button,
+        .uib-month button,
+        .uib-year button {
+            min-width: 100%;
+        }
+        
+        .uib-left,
+        .uib-right {
+            width: 100%
+        }
+    </style>
+    <style type="text/css">
+        .ng-animate.item:not(.left):not(.right) {
+            -webkit-transition: 0s ease-in-out left;
+            transition: 0s ease-in-out left
+        }
+    </style>
+    <style type="text/css">
+        @charset "UTF-8";
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+        
+        ng\:form {
+            display: block;
+        }
+        
+        .ng-animate-shim {
+            visibility: hidden;
+        }
+        
+        .ng-anchor {
+            position: absolute;
+        }
+        
+        .verb-button {
+            background-color: #37A000!important;
+        }
+        
+        .step .panel-heading {
+            background-color: #37A000!important;
+        }
+        
+        .nav-tabs>li.active>span.navtab,
+        .nav-tabs>li.active>span.navtab:hover,
+        .nav-tabs>li.active>span.navtab:focus {
+            background-color: #37A000!important;
+        }
+    </style>
+    <title ng-bind="(wlAppName ? wlAppName + ' ' : '') + 'Visual Designer'" class="ng-binding">Visual Designer</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link href="./bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./rvd.7bbeab8e85c930fd.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900">
+    <link href="./joint.css" rel="stylesheet" media="screen">
+</head>
+
+<body ng-class="'state-'+stateName" class="rvd state-designer" touring="" data-gr-c-s-loaded="true" style="cursor: auto;">
+    <!-- grey out space for take-a-tour -->
+    <div ng-class="{'backdrop-effect':backdropService.shown()}">
+
+        <div class="rvd-header container-fluid">
+            <div ng-controller="headerCtrl" role="navigation" class="ng-scope">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="logo"></div>
+                        <div class="vd-title">Visual Designer</div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- uiView: projectmenu -->
+                                <div ui-view="projectmenu" class="ng-scope">
+                                    <div class="dropdown project-menu pull-right ng-scope">
+                                        <!-- ngIf: docLink -->
+                                        <button class="btn" style="background-color: #37A000!important;" data-toggle="dropdown" title="AP0cfa5fe8836c4460b77d18f6815e744f"> Save </button>
+                                        <ul class="dropdown-menu project-dropdown-menu">
+                                            <li>
+                                                <a href="" ng-click="showParameters()" class="muted ng-scope" translate="designerParameters">Parameters</a>
+                                            </li>
+                                            <li>
+                                                <a href="" id="designer-diagram-toggle" ng-click="toggleShowGraph()" class="muted ng-scope" ng-class="{'active':!!showGraph}" translate="designerDiagramLink">Diagram</a>
+                                            </li>
+                                            <li ng-show="projectKind=='voice'"><a id="wt-show-button" ng-click="signalShowWebTrigger()" class="rvd-clickable-text muted ng-binding">Web Trigger</a></li>
+                                            <li><a vd-report="click" class="muted ng-binding" target="_blank" href="services/apps/AP0cfa5fe8836c4460b77d18f6815e744f/controller">App URL</a></li>
+                                            <li><a ng-click="signalShowProjectSettings()" translate="" class="rvd-clickable-text ng-scope">Settings</a></li>
+                                            <li><a id="log-open-button" href="#/designer/AP0cfa5fe8836c4460b77d18f6815e744f/log" target="_blank" class="rvd-clickable-text disabled ng-binding" a-disabled="!projectSettingsCache.get().logging" title="You can enable logging from Settings option">Log</a></li>
+
+                                            <li class="divider"></li>
+                                            <li class="dropdown-header project-menu-username ng-binding">test@teli.net</li>
+                                            <li ng-show="!!authInfo.username"><a class="rvd-clickable-text ng-binding" ng-click="showSettingsModal()">Account Settings</a></li>
+                                            <li class="dropdown-header">Languages</li>
+                                            <li><a class="rvd-clickable-text" ng-click="changeLanguage('en-US')"><i ng-show="getCurrentLanguage()=='en-US'" class="fa fa-check"></i> en-US</a></li>
+                                            <li><a class="rvd-clickable-text" ng-click="changeLanguage('pt-BR')"><i ng-show="getCurrentLanguage()=='pt-BR'" class="fa fa-check ng-hide"></i> pt-BR</a></li>
+                                            <li><a class="rvd-clickable-text" ng-click="changeLanguage('es')"><i ng-show="getCurrentLanguage()=='es'" class="fa fa-check ng-hide"></i> es</a></li>
+                                            <li><a class="rvd-clickable-text" ng-click="changeLanguage('ja')"><i ng-show="getCurrentLanguage()=='ja'" class="fa fa-check ng-hide"></i> ja</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--
+	<div id="incident-banner" class="announcement-banner hidden">
+		<p>
+			<i class="fa fa-warning"></i> &nbsp;
+			We are experiencing an incident, some visual degradation may occur. We're working on it.
+
+		</p>
+	</div>
+	-->
+
+        <div class="notifications-wrapper ng-hide" ng-show="wlError || notifications.data.length > 0">
+
+            <!-- ngRepeat: notification in notifications.data -->
+        </div>
+
+        <div class="main container-fluid">
+            <!-- ngIf: rvdError -->
+            <div ng-hide="rvdError">
+                <!-- uiView: container -->
+                <div ui-view="container" class="ng-scope">
+                    <div id="rvd-designer" cly-reporter="" class="rvd-designer alert-container cly-reporter ng-scope">
+                        <!-- navigation bar for errors -->
+                        <nav ng-show="projectError" class="navbar navbar-default ng-hide" role="navigation">
+                            <div ng-switch="" on="projectError.className" class="collapse navbar-collapse navbar-ex1-collapse">
+                                <!-- ngSwitchWhen: ProjectDoesNotExist -->
+                                <!-- ngSwitchDefault: -->
+                                <div ng-switch-default="" class="navbar-text navbar-rvd-centered ng-scope">
+                                    <span translate="designerUnknownErrorLabel1" class="ng-scope">Unknown error.</span> <a href="#"><span translate="designerUnknownErrorLabel2" class="ng-scope">View available projects</span></a>
+                                </div>
+                                <!-- end ngSwitchWhen: -->
+                            </div>
+                        </nav>
+
+                        <div ng-hide="projectError">
+
+                            <div class="graph-wrap">
+                                <!-- ngIf: showGraph -->
+                            </div>
+
+                            <div class="row is-flex">
+
+                                <!-- Left menu -->
+                                <div class="verb-toolbox col-md-2 col-sm-3 col-xs-12">
+
+                                    <div class="verb-buttons-area ng-scope" tour-name="main" backdrop="tourStep.active" backdrop-selector="all" backdrop-padding="0" uib-popover-template="'templates/tour-step.html'" popover-is-open="tourStep.active" popover-class="tour-popover" popover-placement="right"
+                                        popover-trigger="'none'">
+                                        <!-- ngIf: !project.projectKind || project.projectKind=="voice" -->
+                                        <div ng-if="!project.projectKind || project.projectKind==&quot;voice&quot;" class="form-group ng-scope">
+                                            <div basic-draggable="" drop-target=".steps" verb-button="play" class="verb-button button-play label btn-default rvd-pickable ui-draggable" style=""><i class="fa fa-play-circle"></i> &nbsp;<span translate="designerVoicePlayLabel" class="ng-scope">Play</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="say" drag-model="protos.stepProto.say" class="verb-button button-say label btn-default rvd-pickable ui-draggable" style=""><i class="fa fa-quote-left"></i> &nbsp;<span translate="designerVoiceSayLabel" class="ng-scope">Say</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="gather" class="verb-button button-gather label btn-default rvd-pickable ui-draggable"><i class="fa fa-th"></i> &nbsp;<span translate="designerVoiceGatherLabel" class="ng-scope">Collect</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="dial" class="verb-button button-dial label btn-default rvd-pickable ui-draggable"><i class="fa fa-phone"></i> &nbsp;<span translate="designerVoiceDialLabel" class="ng-scope">Dial</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="hungup" class="verb-button button-hungup label btn-default rvd-pickable ui-draggable"><i class="fa fa-times"></i> &nbsp;<span translate="designerVoiceHangUpLabel" class="ng-scope">Hang Up</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="control" class="verb-button button-control label btn-default rvd-pickable ui-draggable"><i class="fa fa-cogs"></i> &nbsp;<span translate="text_Control" class="ng-scope">Control</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="externalService" class="verb-button button-externalService label btn-default rvd-pickable ui-draggable"><i class="fa fa-external-link"></i> &nbsp;<span translate="designerVoiceExternalServiceLabel" class="ng-scope">External Service</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="log" class="verb-button button-log label btn-default rvd-pickable ui-draggable" style=""><i class="fa fa-align-justify"></i> &nbsp;<span translate="designerVoiceLogLabel" class="ng-scope">Log</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="reject" class="verb-button button-reject label btn-default rvd-pickable ui-draggable" style=""><i class="fa fa-thumbs-o-down"></i> &nbsp;<span translate="designerVoiceRejectLabel" class="ng-scope">Reject</span></div>
+
+                                            <div basic-draggable="" drop-target=".steps" verb-button="redirect" class="verb-button button-redirect label btn-default rvd-pickable ui-draggable" style=""><i class="fa fa-link"></i> &nbsp;<span translate="designerVoiceRedirectLabel" class="ng-scope">Redirect</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="pause" class="verb-button button-pause label btn-default rvd-pickable ui-draggable"><i class="fa fa-pause"></i> &nbsp;<span translate="designerVoicePauseLabel" class="ng-scope">Pause</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="sms" class="verb-button button-sms label btn-default rvd-pickable ui-draggable"><i class="fa fa-envelope-o"></i> &nbsp;<span translate="designerVoiceSmsLabel" class="ng-scope">SMS</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="email" class="verb-button button-email label btn-default rvd-pickable ui-draggable"><i class="fa fa-comment-o"></i> &nbsp;<span translate="designerVoiceEmailLabel" class="ng-scope">Email</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="record" class="verb-button button-record label btn-default rvd-pickable ui-draggable" style=""><i class="fa fa-microphone"></i> &nbsp;<span translate="designerVoiceRecordLabel" class="ng-scope">Record</span></div>
+                                            <div basic-draggable="" drop-target=".steps" verb-button="fax" class="verb-button button-fax label btn-default rvd-pickable ui-draggable" style="display: none;"><i class="fa fa-print"></i> &nbsp;<span translate="designerVoiceFaxLabel" class="ng-scope">Fax</span></div>
+                                        </div>
+                                        <!-- end ngIf: !project.projectKind || project.projectKind=="voice" -->
+                                        <!-- ngIf: project.projectKind=="ussd" -->
+                                        <!-- ngIf: project.projectKind=="sms" -->
+                                    </div>
+
+
+                                </div>
+                                <!-- /wavManager -->
+
+                                <!-- Workspace on the right -->
+                                <div class="steplisting col-md-10 col-sm-9 col-xs-12">
+                                    <div>
+                                        <div class="module-menu-area row" id="es">
+
+                                        </div>
+
+                                        <ul ng-show="visibleNodes.length != 0" class="nav nav-tabs module-tabs">
+                                            <li ng-repeat="nodeSummary in getEditedNodeNames()" ng-class="{active:isNodeActive(nodeSummary.name)}" class="module-tab ng-scope active">
+                                                <span ng-click="setActiveNode(nodeSummary.name)" href="#" class="navtab" title="start" ng-init="view={editLabel:false,label:getNodeLabel(nodeSummary.name)}"> <span ng-show="!view.editLabel"> <!-- <a ng-click='node.iface.editLabel=!node.iface.editLabel'>{{node.label}}</a> -->
+										<a ng-click="onEditNodeLabel(view,nodeSummary.name)" class="rvd-clickable-text module-tab-label ng-binding">Welcome</a>
+										&nbsp;&nbsp;&nbsp;
+										<i ng-click="removeNode(nodeSummary.name)" ng-show="isNodeActive(nodeSummary.name)" class="fa fa-trash-o rvd-clickable cy-button-removeModule" title="Remove module"></i>
+										&nbsp;&nbsp;
+										<i ng-click="hideNode(nodeSummary.name)" ng-show="isNodeActive(nodeSummary.name)" class="fa fa-sort-desc rvd-clickable" title="Hide module"></i>
+
+								</span>
+                                                <div ng-show="view.editLabel" class="ng-hide">
+                                                    <input type="text" ng-model="view.label" class="cy-text-editLabel ng-pristine ng-untouched ng-valid ng-not-empty" ng-focus="view.editLabel" ng-focus-lost="onEditLabelFinished(view,nodeSummary.name)">                                                    &nbsp;
+                                                </div>
+                                                </span>
+                                            </li>
+                                            <!-- end ngRepeat: nodeSummary in getEditedNodeNames() -->
+                                        </ul>
+
+                                        <div class="rvd-node ng-hide" ng-show="visibleNodes.length == 0">
+                                            <div class="no-modules-warning text-muted">No modules are being edited. Use the <i>Modules</i> dropdown to edit an existing module or create a new one.</div>
+                                        </div>
+
+                                        <!-- ngRepeat: nodeSummary in getEditedNodeNames() -->
+                                        <div class="rvd-node ng-scope" ng-repeat="nodeSummary in getEditedNodeNames()" ng-show="isNodeActive(nodeSummary.name)">
+
+                                            <div ng-controller="nodeController" class="ng-scope">
+                                                <!-- ngInclude: -->
+                                                <ng-include src="'templates/modules/' + node.kind + 'Module.html'" class="ng-scope">
+                                                    <div rvd-module="" class="ng-scope">
+                                                        <div cly-reporter="" id="voice-modules-listing" basic-sortable="" list-model="node.steps" class="steps step-list ng-scope ui-sortable" item-added="addStep" target-model="node">
+                                                            <!-- ngRepeat: step in node.steps -->
+                                                            <div id="step-step7" class="step ng-scope" ng-repeat="step in node.steps">
+                                                                <!-- ngInclude: -->
+                                                                <ng-include src="'templates/steps/' + step.kind + 'Step.html'" class="ng-scope">
+                                                                    <div class="step say-step panel panel-default ng-scope">
+                                                                        <div class="panel-heading">
+                                                                            <step-heading>
+                                                                                <h4 class="panel-title">
+                                                                                    <i ng-click="step.iface.isCollapsed = !step.iface.isCollapsed" class="fa rvd-clickable pull-left fa-caret-down" ng-class="{'fa-caret-right': step.iface.isCollapsed, 'fa-caret-down': !step.iface.isCollapsed}"></i>
+                                                                                    <i ng-click="removeStep(step,listModel)" class="fa fa-trash-o pull-right rvd-clickable cy-button-remove"></i>
+                                                                                    <div class="rvd-handle">
+                                                                                        &nbsp;
+                                                                                        <span title="step7" class="ng-binding">Say <span ng-show="getCurrentLanguage() !== 'en-US'" class="ng-binding ng-hide">(say)</span></span>
+                                                                                        <span ng-show="step.iface.isCollapsed" ng-transclude="" class="ng-hide"><small class="ng-binding ng-scope"></small></span>
+                                                                                        <i ng-show="step.iface.showWarning" class="fa fa-warning step-warning-icon ng-hide"></i>
+                                                                                    </div>
+                                                                                </h4>
+                                                                            </step-heading>
+                                                                        </div>
+                                                                        <div class="panel-body" ng-hide="step.iface.isCollapsed">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12 col-md-12">
+                                                                                    <form lookup-context="" name="form" novalidate="" class="ng-pristine ng-scope ng-invalid ng-invalid-required">
+                                                                                        <div class="form-group tour-phrase">
+                                                                                            <label class="help-tooltip" tooltip="Type the text that will be read to the user. Prepend variables names with a dollar sign e.g. '$variablename'" tooltip-popup-delay="1000" tooltip-trigger="mouseenter"><span translate="sayStepTextLabel" class="ng-scope">Text</span></label>
+                                                                                            <textarea ng-model="step.phrase" lookup-target="" name="phrase" class="form-control cy-text-phrase ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" required=""></textarea>
+                                                                                            <div ng-show="form.phrase.$invalid" class="validation-error ng-scope" translate="sayStepTextValidationError">The phrase text is missing</div>
+                                                                                            <div class="validation-error pull-left text-muted ng-scope" translate="ssmlHint">Learn more about <a href="/docs/rcml/ssml-reference.html" target="_blank">SSML syntax</a> (Google or Amazon Polly text-to-speech engines)</div>
+                                                                                        </div>
+                                                                                        <div class="form-group pull-right">
+                                                                                            <div ng-class="{'input-group-btn':view=='input-group', 'btn-group':view=='standalone', 'variable-lookup':view=='input-group' }" variable="step.phrase" view="standalone" class="btn-group">
+                                                                                                <!-- ngIf: view=='standalone' --><button ng-if="view=='standalone'" type="button" class="btn btn-secondary dropdown-toggle ng-scope" data-toggle="dropdown" translate-attr="{title: 'variableLookupStandaloneButtonTitle'}"
+                                                                                                    title="insert VD variable">
+      <span translate="variableLookupStandaloneButton" class="ng-scope">Lookup variable</span> <span class="caret"></span>
+  </button>
+                                                                                                <!-- end ngIf: view=='standalone' -->
+                                                                                                <!-- ngIf: view=='input-group' -->
+                                                                                                <ul class="dropdown-menu" role="menu">
+                                                                                                    <!-- ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_AccountSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_ApiVersion</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Body</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallerName</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallTimestamp</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialCallDuration</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialCallSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialCallStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialRingDuration</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Digits</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Direction</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_FaxSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_FaxStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_ForwardedFrom</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_From</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_InstanceId</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_PublicRecordingUrl</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_RecordingDuration</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_RecordingUrl</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_ReferTarget</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_SmsSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_SmsStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_To</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Transferee</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Transferor</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <i ng-click="step.iface.optionsVisible = !step.iface.optionsVisible" class="fa fa-cog rvd-clickable" ng-class="{'rvd-active': step.iface.optionsVisible }"></i>
+                                                                            <div uib-collapse="!step.iface.optionsVisible" class="collapse" style="height: 0px;">
+                                                                                <br>
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-5  form-group language">
+                                                                                        <form name="form" novalidate="" class="ng-pristine ng-valid">
+                                                                                            <div class="input-group">
+                                                                                                <span class="input-group-addon  ng-binding">Language</span>
+                                                                                                <select name="ttslangs" auto-clear="" ng-model="step.language" ng-options="language.name as language.label for language in ttsLangs" class="form-control say-language-dropdown cy-dropdown-languages ng-pristine ng-untouched ng-valid ng-empty"><option value="undefined:undefined" selected="selected"></option><option label="(Google) Arabic Wavenet A" value="string:google.ar-XA-Wavenet-A">(Google) Arabic Wavenet A</option><option label="(Google) Arabic Wavenet B" value="string:google.ar-XA-Wavenet-B">(Google) Arabic Wavenet B</option><option label="(Google) Arabic Wavenet A" value="string:google.ar-XA-Wavenet-C">(Google) Arabic Wavenet A</option><option label="(Google) Czech Wavenet A" value="string:google.cs-CZ-Wavenet-A">(Google) Czech Wavenet A</option><option label="(Google) Denmark Wavenet A" value="string:google.da-DK-Wavenet-A">(Google) Denmark Wavenet A</option><option label="(Google) German Wavenet A" value="string:google.de-DE-Wavenet-A">(Google) German Wavenet A</option><option label="(Google) German Wavenet B" value="string:google.de-DE-Wavenet-B">(Google) German Wavenet B</option><option label="(Google) German Wavenet C" value="string:google.de-DE-Wavenet-C">(Google) German Wavenet C</option><option label="(Google) German Wavenet D" value="string:google.de-DE-Wavenet-D">(Google) German Wavenet D</option><option label="(Google) Greek Wavenet A" value="string:google.el-GR-Wavenet-A">(Google) Greek Wavenet A</option><option label="(Google) Australian Wavenet A" value="string:google.en-AU-Wavenet-A">(Google) Australian Wavenet A</option><option label="(Google) Australian Wavenet B" value="string:google.en-AU-Wavenet-B">(Google) Australian Wavenet B</option><option label="(Google) Australian Wavenet C" value="string:google.en-AU-Wavenet-C">(Google) Australian Wavenet C</option><option label="(Google) Australian Wavenet D" value="string:google.en-AU-Wavenet-D">(Google) Australian Wavenet D</option><option label="(Google) English British Wavenet A" value="string:google.en-GB-Wavenet-A">(Google) English British Wavenet A</option><option label="(Google) English British Wavenet B" value="string:google.en-GB-Wavenet-B">(Google) English British Wavenet B</option><option label="(Google) English British Wavenet C" value="string:google.en-GB-Wavenet-C">(Google) English British Wavenet C</option><option label="(Google) English British Wavenet D" value="string:google.en-GB-Wavenet-D">(Google) English British Wavenet D</option><option label="(Google) English Indian Wavenet A" value="string:google.en-IN-Wavenet-A">(Google) English Indian Wavenet A</option><option label="(Google) English Indian Wavenet B" value="string:google.en-IN-Wavenet-B">(Google) English Indian Wavenet B</option><option label="(Google) English Indian Wavenet C" value="string:google.en-IN-Wavenet-C">(Google) English Indian Wavenet C</option><option label="(Google) English US Wavenet A" value="string:google.en-US-Wavenet-A">(Google) English US Wavenet A</option><option label="(Google) English US Wavenet B" value="string:google.en-US-Wavenet-B">(Google) English US Wavenet B</option><option label="(Google) English US Wavenet C" value="string:google.en-US-Wavenet-C">(Google) English US Wavenet C</option><option label="(Google) English US Wavenet D" value="string:google.en-US-Wavenet-D">(Google) English US Wavenet D</option><option label="(Google) English US Wavenet E" value="string:google.en-US-Wavenet-E">(Google) English US Wavenet E</option><option label="(Google) English US Wavenet F" value="string:google.en-US-Wavenet-F">(Google) English US Wavenet F</option><option label="(Google) Finnish Wavenet A" value="string:google.fi-FI-Wavenet-A">(Google) Finnish Wavenet A</option><option label="(Google) Philippian Wavenet A" value="string:google.fil-PH-Wavenet-A">(Google) Philippian Wavenet A</option><option label="(Google) French Canadian Wavenet A" value="string:google.fr-CA-Wavenet-A">(Google) French Canadian Wavenet A</option><option label="(Google) French Canadian Wavenet B" value="string:google.fr-CA-Wavenet-B">(Google) French Canadian Wavenet B</option><option label="(Google) French Canadian Wavenet C" value="string:google.fr-CA-Wavenet-C">(Google) French Canadian Wavenet C</option><option label="(Google) French Canadian Wavenet D" value="string:google.fr-CA-Wavenet-D">(Google) French Canadian Wavenet D</option><option label="(Google) French Wavenet A" value="string:google.fr-FR-Wavenet-A">(Google) French Wavenet A</option><option label="(Google) French Wavenet B" value="string:google.fr-FR-Wavenet-B">(Google) French Wavenet B</option><option label="(Google) French Wavenet C" value="string:google.fr-FR-Wavenet-C">(Google) French Wavenet C</option><option label="(Google) French Wavenet D" value="string:google.fr-FR-Wavenet-D">(Google) French Wavenet D</option><option label="(Google) Hindi Wavenet A" value="string:google.hi-IN-Wavenet-A">(Google) Hindi Wavenet A</option><option label="(Google) Hindi Wavenet B" value="string:google.hi-IN-Wavenet-B">(Google) Hindi Wavenet B</option><option label="(Google) Hindi Wavenet C" value="string:google.hi-IN-Wavenet-C">(Google) Hindi Wavenet C</option><option label="(Google) Hungarian Wavenet A" value="string:google.hu-HU-Wavenet-A">(Google) Hungarian Wavenet A</option><option label="(Google) Bahasa Indonesia Wavenet A" value="string:google.id-ID-Wavenet-A">(Google) Bahasa Indonesia Wavenet A</option><option label="(Google) Bahasa Indonesia Wavenet B" value="string:google.id-ID-Wavenet-B">(Google) Bahasa Indonesia Wavenet B</option><option label="(Google) Bahasa Indonesia Wavenet C" value="string:google.id-ID-Wavenet-C">(Google) Bahasa Indonesia Wavenet C</option><option label="(Google) Italian Wavenet A" value="string:google.it-IT-Wavenet-A">(Google) Italian Wavenet A</option><option label="(Google) Italian Wavenet B" value="string:google.it-IT-Wavenet-B">(Google) Italian Wavenet B</option><option label="(Google) Italian Wavenet C" value="string:google.it-IT-Wavenet-C">(Google) Italian Wavenet C</option><option label="(Google) Italian Wavenet D" value="string:google.it-IT-Wavenet-D">(Google) Italian Wavenet D</option><option label="(Google) Japanese Wavenet A" value="string:google.ja-JP-Wavenet-A">(Google) Japanese Wavenet A</option><option label="(Google) Japanese Wavenet B" value="string:google.ja-JP-Wavenet-B">(Google) Japanese Wavenet B</option><option label="(Google) Japanese Wavenet C" value="string:google.ja-JP-Wavenet-C">(Google) Japanese Wavenet C</option><option label="(Google) Japanese Wavenet D" value="string:google.ja-JP-Wavenet-D">(Google) Japanese Wavenet D</option><option label="(Google) Korean Wavenet A" value="string:google.ko-KR-Wavenet-A">(Google) Korean Wavenet A</option><option label="(Google) Korean Wavenet B" value="string:google.ko-KR-Wavenet-B">(Google) Korean Wavenet B</option><option label="(Google) Korean Wavenet C" value="string:google.ko-KR-Wavenet-C">(Google) Korean Wavenet C</option><option label="(Google) Korean Wavenet D" value="string:google.ko-KR-Wavenet-D">(Google) Korean Wavenet D</option><option label="(Google) Norwegian Wavenet A" value="string:google.nb-NO-Wavenet-A">(Google) Norwegian Wavenet A</option><option label="(Google) Norwegian Wavenet B" value="string:google.nb-NO-Wavenet-B">(Google) Norwegian Wavenet B</option><option label="(Google) Norwegian Wavenet C" value="string:google.nb-NO-Wavenet-C">(Google) Norwegian Wavenet C</option><option label="(Google) Norwegian Wavenet D" value="string:google.nb-NO-Wavenet-D">(Google) Norwegian Wavenet D</option><option label="(Google) Norwegian Wavenet E" value="string:google.nb-no-Wavenet-E">(Google) Norwegian Wavenet E</option><option label="(Google) Nederland Wavenet A" value="string:google.nl-NL-Wavenet-A">(Google) Nederland Wavenet A</option><option label="(Google) Nederland Wavenet B" value="string:google.nl-NL-Wavenet-B">(Google) Nederland Wavenet B</option><option label="(Google) Nederland Wavenet C" value="string:google.nl-NL-Wavenet-C">(Google) Nederland Wavenet C</option><option label="(Google) Nederland Wavenet D" value="string:google.nl-NL-Wavenet-D">(Google) Nederland Wavenet D</option><option label="(Google) Nederland Wavenet E" value="string:google.nl-NL-Wavenet-E">(Google) Nederland Wavenet E</option><option label="(Google) Polish Wavenet A" value="string:google.pl-PL-Wavenet-A">(Google) Polish Wavenet A</option><option label="(Google) Polish Wavenet B" value="string:google.pl-PL-Wavenet-B">(Google) Polish Wavenet B</option><option label="(Google) Polish Wavenet C" value="string:google.pl-PL-Wavenet-C">(Google) Polish Wavenet C</option><option label="(Google) Polish Wavenet D" value="string:google.pl-PL-Wavenet-D">(Google) Polish Wavenet D</option><option label="(Google) Polish Wavenet E" value="string:google.pl-PL-Wavenet-E">(Google) Polish Wavenet E</option><option label="(Google) Brazilian Wavenet A" value="string:google.pt-BR-Wavenet-A">(Google) Brazilian Wavenet A</option><option label="(Google) Portuguese Wavenet A" value="string:google.pt-PT-Wavenet-A">(Google) Portuguese Wavenet A</option><option label="(Google) Portuguese Wavenet B" value="string:google.pt-PT-Wavenet-B">(Google) Portuguese Wavenet B</option><option label="(Google) Portuguese Wavenet C" value="string:google.pt-PT-Wavenet-C">(Google) Portuguese Wavenet C</option><option label="(Google) Portuguese Wavenet D" value="string:google.pt-PT-Wavenet-D">(Google) Portuguese Wavenet D</option><option label="(Google) Russian Wavenet A" value="string:google.ru-RU-Wavenet-A">(Google) Russian Wavenet A</option><option label="(Google) Russian Wavenet B" value="string:google.ru-RU-Wavenet-B">(Google) Russian Wavenet B</option><option label="(Google) Russian Wavenet C" value="string:google.ru-RU-Wavenet-C">(Google) Russian Wavenet C</option><option label="(Google) Russian Wavenet D" value="string:google.ru-RU-Wavenet-D">(Google) Russian Wavenet D</option><option label="(Google) Slovak Wavenet A" value="string:google.sk-SK-Wavenet-A">(Google) Slovak Wavenet A</option><option label="(Google) Swedish Wavenet A" value="string:google.sv-SE-Wavenet-A">(Google) Swedish Wavenet A</option><option label="(Google) Turkish Wavenet A" value="string:google.tr-TR-Wavenet-A">(Google) Turkish Wavenet A</option><option label="(Google) Turkish Wavenet B" value="string:google.tr-TR-Wavenet-B">(Google) Turkish Wavenet B</option><option label="(Google) Turkish Wavenet C" value="string:google.tr-TR-Wavenet-C">(Google) Turkish Wavenet C</option><option label="(Google) Turkish Wavenet D" value="string:google.tr-TR-Wavenet-D">(Google) Turkish Wavenet D</option><option label="(Google) Turkish Wavenet E" value="string:google.tr-TR-Wavenet-E">(Google) Turkish Wavenet E</option><option label="(Google) Ukrainian Wavenet A" value="string:google.uk-UA-Wavenet-A">(Google) Ukrainian Wavenet A</option><option label="(Google) Vietnamese Wavenet A" value="string:google.vi-VN-Wavenet-A">(Google) Vietnamese Wavenet A</option><option label="(Google) Vietnamese Wavenet B" value="string:google.vi-VN-Wavenet-B">(Google) Vietnamese Wavenet B</option><option label="(Google) Vietnamese Wavenet C" value="string:google.vi-VN-Wavenet-C">(Google) Vietnamese Wavenet C</option><option label="(Google) Vietnamese Wavenet D" value="string:google.vi-VN-Wavenet-D">(Google) Vietnamese Wavenet D</option><option label="(Google) Spanish Standard A" value="string:google.es-ES-Standard-A">(Google) Spanish Standard A</option><option label="(Google) Arabic Standard A" value="string:google.ar-XA-Standard-A">(Google) Arabic Standard A</option><option label="(Google) Arabic Standard B" value="string:google.ar-XA-Standard-B">(Google) Arabic Standard B</option><option label="(Google) Arabic Standard C" value="string:google.ar-XA-Standard-C">(Google) Arabic Standard C</option><option label="(Google) Italian Standard A" value="string:google.it-IT-Standard-A">(Google) Italian Standard A</option><option label="(Google) Russian Standard A" value="string:google.ru-RU-Standard-A">(Google) Russian Standard A</option><option label="(Google) Russian Standard B" value="string:google.ru-RU-Standard-B">(Google) Russian Standard B</option><option label="(Google) Russian Standard C" value="string:google.ru-RU-Standard-C">(Google) Russian Standard C</option><option label="(Google) Russian Standard D" value="string:google.ru-RU-Standard-D">(Google) Russian Standard D</option><option label="(Google) Chinese Mandarin Standard A" value="string:google.cmn-CN-Standard-A">(Google) Chinese Mandarin Standard A</option><option label="(Google) Chinese Mandarin Standard B" value="string:google.cmn-CN-Standard-B">(Google) Chinese Mandarin Standard B</option><option label="(Google) Chiinese Mandarin Standard C" value="string:google.cmn-CN-Standard-C">(Google) Chiinese Mandarin Standard C</option><option label="(Google) Korean Standard A" value="string:google.ko-KR-Standard-A">(Google) Korean Standard A</option><option label="(Google) Korean Standard B" value="string:google.ko-KR-Standard-B">(Google) Korean Standard B</option><option label="(Google) Korean Standard C" value="string:google.ko-KR-Standard-C">(Google) Korean Standard C</option><option label="(Google) Korean Standard D" value="string:google.ko-KR-Standard-D">(Google) Korean Standard D</option><option label="(Google) Japanese Standard A" value="string:google.ja-JP-Standard-A">(Google) Japanese Standard A</option><option label="(Google) Japanese Standard B" value="string:google.ja-JP-Standard-B">(Google) Japanese Standard B</option><option label="(Google) Japanese Standard C" value="string:google.ja-JP-Standard-C">(Google) Japanese Standard C</option><option label="(Google) Japanese Standard D" value="string:google.ja-JP-Standard-D">(Google) Japanese Standard D</option><option label="(Google) Vietnamese Standard A" value="string:google.vi-VN-Standard-A">(Google) Vietnamese Standard A</option><option label="(Google) Vietnamese Standard B" value="string:google.vi-VN-Standard-B">(Google) Vietnamese Standard B</option><option label="(Google) Vietnamese Standard C" value="string:google.vi-VN-Standard-C">(Google) Vietnamese Standard C</option><option label="(Google) Vietnamese Standard D" value="string:google.vi-VN-Standard-D">(Google) Vietnamese Standard D</option><option label="(Google) Philippian Standard A" value="string:google.fil-PH-Standard-A">(Google) Philippian Standard A</option><option label="(Google) Bahasa Indonesia Standard A" value="string:google.id-ID-Standard-A">(Google) Bahasa Indonesia Standard A</option><option label="(Google) Bahasa Indonesia Standard B" value="string:google.id-ID-Standard-B">(Google) Bahasa Indonesia Standard B</option><option label="(Google) Bahasa Indonesia Standard C" value="string:google.id-ID-Standard-C">(Google) Bahasa Indonesia Standard C</option><option label="(Google) Nederland Standard A" value="string:google.nl-NL-Standard-A">(Google) Nederland Standard A</option><option label="(Google) Nederland Standard B" value="string:google.nl-NL-Standard-B">(Google) Nederland Standard B</option><option label="(Google) Nederland Standard C" value="string:google.nl-NL-Standard-C">(Google) Nederland Standard C</option><option label="(Google) Nederland Standard D" value="string:google.nl-NL-Standard-D">(Google) Nederland Standard D</option><option label="(Google) Nederland Standard E" value="string:google.nl-NL-Standard-E">(Google) Nederland Standard E</option><option label="(Google) Czech Standard A" value="string:google.cs-CZ-Standard-A">(Google) Czech Standard A</option><option label="(Google) Greek Standard A" value="string:google.el-GR-Standard-A">(Google) Greek Standard A</option><option label="(Google) Brazilian Standard A" value="string:google.pt-BR-Standard-A">(Google) Brazilian Standard A</option><option label="(Google) Hungarian Standard A" value="string:google.hu-HU-Standard-A">(Google) Hungarian Standard A</option><option label="(Google) Polish Standard A" value="string:google.pl-PL-Standard-A">(Google) Polish Standard A</option><option label="(Google) Polish Standard B" value="string:google.pl-PL-Standard-B">(Google) Polish Standard B</option><option label="(Google) Polish Standard C" value="string:google.pl-PL-Standard-C">(Google) Polish Standard C</option><option label="(Google) Polish Standard D" value="string:google.pl-PL-Standard-D">(Google) Polish Standard D</option><option label="(Google) Polish Standard E" value="string:google.pl-PL-Standard-E">(Google) Polish Standard E</option><option label="(Google) Slovak Standard A" value="string:google.sk-SK-Standard-A">(Google) Slovak Standard A</option><option label="(Google) Turkish Standard A" value="string:google.tr-TR-Standard-A">(Google) Turkish Standard A</option><option label="(Google) Turkish Standard B" value="string:google.tr-TR-Standard-B">(Google) Turkish Standard B</option><option label="(Google) Turkish Standard C" value="string:google.tr-TR-Standard-C">(Google) Turkish Standard C</option><option label="(Google) Turkish Standard D" value="string:google.tr-TR-Standard-D">(Google) Turkish Standard D</option><option label="(Google) Turkish Standard E" value="string:google.tr-TR-Standard-E">(Google) Turkish Standard E</option><option label="(Google) Ukrainian Standard A" value="string:google.uk-UA-Standard-A">(Google) Ukrainian Standard A</option><option label="(Google) English Indian Standard A" value="string:google.en-IN-Standard-A">(Google) English Indian Standard A</option><option label="(Google) English Indian Standard B" value="string:google.en-IN-Standard-B">(Google) English Indian Standard B</option><option label="(Google) English Indian Standard C" value="string:google.en-IN-Standard-C">(Google) English Indian Standard C</option><option label="(Google) Hindi Standard A" value="string:google.hi-IN-Standard-A">(Google) Hindi Standard A</option><option label="(Google) Hindi Standard B" value="string:google.hi-IN-Standard-B">(Google) Hindi Standard B</option><option label="(Google) Hindi Standard C" value="string:google.hi-IN-Standard-C">(Google) Hindi Standard C</option><option label="(Google) Denmark Standard A" value="string:google.da-DK-Standard-A">(Google) Denmark Standard A</option><option label="(Google) Finish Standard A" value="string:google.fi-FI-Standard-A">(Google) Finish Standard A</option><option label="(Google) Portuguese Standard A" value="string:google.pt-PT-Standard-A">(Google) Portuguese Standard A</option><option label="(Google) Portuguese Standard B" value="string:google.pt-PT-Standard-B">(Google) Portuguese Standard B</option><option label="(Google) Portuguese Standard C" value="string:google.pt-PT-Standard-C">(Google) Portuguese Standard C</option><option label="(Google) Portuguese Standard D" value="string:google.pt-PT-Standard-D">(Google) Portuguese Standard D</option><option label="(Google) Norwegian Standard A" value="string:google.nb-NO-Standard-A">(Google) Norwegian Standard A</option><option label="(Google) Norwegian Standard B" value="string:google.nb-NO-Standard-B">(Google) Norwegian Standard B</option><option label="(Google) Norwegian Standard C" value="string:google.nb-NO-Standard-C">(Google) Norwegian Standard C</option><option label="(Google) Norwegian Standard D" value="string:google.nb-NO-Standard-D">(Google) Norwegian Standard D</option><option label="(Google) Norwegian Standard E" value="string:google.nb-no-Standard-E">(Google) Norwegian Standard E</option><option label="(Google) Swedish Standard A" value="string:google.sv-SE-Standard-A">(Google) Swedish Standard A</option><option label="(Google) English British Standard A" value="string:google.en-GB-Standard-A">(Google) English British Standard A</option><option label="(Google) English British Standard B" value="string:google.en-GB-Standard-B">(Google) English British Standard B</option><option label="(Google) English British Standard C" value="string:google.en-GB-Standard-C">(Google) English British Standard C</option><option label="(Google) English British Standard D" value="string:google.en-GB-Standard-D">(Google) English British Standard D</option><option label="(Google) English US Standard B" value="string:google.en-US-Standard-B">(Google) English US Standard B</option><option label="(Google) English US Standard C" value="string:google.en-US-Standard-C">(Google) English US Standard C</option><option label="(Google) English US Standard D" value="string:google.en-US-Standard-D">(Google) English US Standard D</option><option label="(Google) English US Standard E" value="string:google.en-US-Standard-E">(Google) English US Standard E</option><option label="(Google) German Standard A" value="string:google.de-DE-Standard-A">(Google) German Standard A</option><option label="(Google) German Standard B" value="string:google.de-DE-Standard-B">(Google) German Standard B</option><option label="(Google) English Australian Standard A" value="string:google.en-AU-Standard-A">(Google) English Australian Standard A</option><option label="(Google) English Australian Standard B" value="string:google.en-AU-Standard-B">(Google) English Australian Standard B</option><option label="(Google) English Australian Standard C" value="string:google.en-AU-Standard-C">(Google) English Australian Standard C</option><option label="(Google) English Australian Standard D" value="string:google.en-AU-Standard-D">(Google) English Australian Standard D</option><option label="(Google) French Canadian Standard A" value="string:google.fr-CA-Standard-A">(Google) French Canadian Standard A</option><option label="(Google) French Canadian Standard B" value="string:google.fr-CA-Standard-B">(Google) French Canadian Standard B</option><option label="(Google) French Canadian Standard C" value="string:google.fr-CA-Standard-C">(Google) French Canadian Standard C</option><option label="(Google) French Canadian Standard D" value="string:google.fr-CA-Standard-D">(Google) French Canadian Standard D</option><option label="(Google) French Standard A" value="string:google.fr-FR-Standard-A">(Google) French Standard A</option><option label="(Google) French Standard B" value="string:google.fr-FR-Standard-B">(Google) French Standard B</option><option label="(Google) French Standard C" value="string:google.fr-FR-Standard-C">(Google) French Standard C</option><option label="(Google) French Standard D" value="string:google.fr-FR-Standard-D">(Google) French Standard D</option><option label="(Google) Italian Standard B" value="string:google.it-IT-Standard-B">(Google) Italian Standard B</option><option label="(Google) Italian Standard C" value="string:google.it-IT-Standard-C">(Google) Italian Standard C</option><option label="(Google) Italian Standard D" value="string:google.it-IT-Standard-D">(Google) Italian Standard D</option><option label="(AWS Polly) Chinese, Mandarin" value="string:awspolly.cmn-CN">(AWS Polly) Chinese, Mandarin</option><option label="(AWS Polly) Danish" value="string:awspolly.da-DK">(AWS Polly) Danish</option><option label="(AWS Polly) Dutch" value="string:awspolly.nl-NL">(AWS Polly) Dutch</option><option label="(AWS Polly) English, Australian" value="string:awspolly.en-AU">(AWS Polly) English, Australian</option><option label="(AWS Polly) English, British" value="string:awspolly.en-GB">(AWS Polly) English, British</option><option label="(AWS Polly) English, Indian" value="string:awspolly.en-IN">(AWS Polly) English, Indian</option><option label="(AWS Polly) English, US" value="string:awspolly.en-US">(AWS Polly) English, US</option><option label="(AWS Polly) English, Welsh" value="string:awspolly.en-GB-WLS">(AWS Polly) English, Welsh</option><option label="(AWS Polly) French" value="string:awspolly.fr-FR">(AWS Polly) French</option><option label="(AWS Polly) French, Canadian" value="string:awspolly.fr-CA">(AWS Polly) French, Canadian</option><option label="(AWS Polly) German" value="string:awspolly.de-DE">(AWS Polly) German</option><option label="(AWS Polly) Hindi" value="string:awspolly.hi-IN">(AWS Polly) Hindi</option><option label="(AWS Polly) Icelandic" value="string:awspolly.is-IS">(AWS Polly) Icelandic</option><option label="(AWS Polly) Italian" value="string:awspolly.it-IT">(AWS Polly) Italian</option><option label="(AWS Polly) Japanese" value="string:awspolly.ja-JP">(AWS Polly) Japanese</option><option label="(AWS Polly) Korean" value="string:awspolly.ko-KR">(AWS Polly) Korean</option><option label="(AWS Polly) Norwegian" value="string:awspolly.nb-NO">(AWS Polly) Norwegian</option><option label="(AWS Polly) Polish" value="string:awspolly.pl-PL">(AWS Polly) Polish</option><option label="(AWS Polly) Portuguese, Brazilian" value="string:awspolly.pt-BR">(AWS Polly) Portuguese, Brazilian</option><option label="(AWS Polly) Portuguese, European" value="string:awspolly.pt-PT">(AWS Polly) Portuguese, European</option><option label="(AWS Polly) Romanian" value="string:awspolly.ro-RO">(AWS Polly) Romanian</option><option label="(AWS Polly) Russian" value="string:awspolly.ru-RU">(AWS Polly) Russian</option><option label="(AWS Polly) Spanish, European" value="string:awspolly.es-ES">(AWS Polly) Spanish, European</option><option label="(AWS Polly) Spanish, Mexican" value="string:awspolly.es-MX">(AWS Polly) Spanish, Mexican</option><option label="(AWS Polly) Spanish, US" value="string:awspolly.es-US">(AWS Polly) Spanish, US</option><option label="(AWS Polly) Swedish" value="string:awspolly.sv-SE">(AWS Polly) Swedish</option><option label="(AWS Polly) Turkish" value="string:awspolly.tr-TR">(AWS Polly) Turkish</option><option label="(AWS Polly) Welsh" value="string:awspolly.cy-GB">(AWS Polly) Welsh</option><option label="(Acapela) Belgium-French" value="string:acapela.bf">(Acapela) Belgium-French</option><option label="(Acapela) Brazilian-Portugues" value="string:acapela.bp">(Acapela) Brazilian-Portugues</option><option label="(Acapela) British-English" value="string:acapela.en-gb">(Acapela) British-English</option><option label="(Acapela) Canadian-French" value="string:acapela.cf">(Acapela) Canadian-French</option><option label="(Acapela) Chinese" value="string:acapela.zh-cn">(Acapela) Chinese</option><option label="(Acapela) Czech" value="string:acapela.cs">(Acapela) Czech</option><option label="(Acapela) Dannish" value="string:acapela.dan">(Acapela) Dannish</option><option label="(Acapela) English" value="string:acapela.en">(Acapela) English</option><option label="(Acapela) Finnish" value="string:acapela.fi">(Acapela) Finnish</option><option label="(Acapela) Spanish" value="string:acapela.es">(Acapela) Spanish</option><option label="(Acapela) French" value="string:acapela.fr">(Acapela) French</option><option label="(Acapela) German" value="string:acapela.de">(Acapela) German</option><option label="(Acapela) Greek" value="string:acapela.el">(Acapela) Greek</option><option label="(Acapela) Italian" value="string:acapela.it">(Acapela) Italian</option><option label="(Acapela) Netherlands-Dutch" value="string:acapela.nl">(Acapela) Netherlands-Dutch</option><option label="(Acapela) Japanese" value="string:acapela.ja">(Acapela) Japanese</option><option label="(Acapela) Norwegian" value="string:acapela.no">(Acapela) Norwegian</option><option label="(Acapela) Polish" value="string:acapela.pl">(Acapela) Polish</option><option label="(Acapela) Portuguese" value="string:acapela.pt">(Acapela) Portuguese</option><option label="(Acapela) Russian" value="string:acapela.ru">(Acapela) Russian</option><option label="(Acapela) Saudi-Arabia Arabic" value="string:acapela.ar">(Acapela) Saudi-Arabia Arabic</option><option label="(Acapela) Spain Catalan" value="string:acapela.ca">(Acapela) Spain Catalan</option><option label="(Acapela) Swedish" value="string:acapela.sv">(Acapela) Swedish</option><option label="(Acapela) Turkish" value="string:acapela.tr">(Acapela) Turkish</option><option label="(Voicerss) Catalan" value="string:voicerss.ca">(Voicerss) Catalan</option><option label="(Voicerss) Chinese (China)" value="string:voicerss.zh-cn">(Voicerss) Chinese (China)</option><option label="(Voicerss) Chinese (Hong Kong)" value="string:voicerss.zh-hk">(Voicerss) Chinese (Hong Kong)</option><option label="(Voicerss) Chinese (Taiwan)" value="string:voicerss.zh-tw">(Voicerss) Chinese (Taiwan)</option><option label="(Voicerss) Danish" value="string:voicerss.da">(Voicerss) Danish</option><option label="(Voicerss) Dutch" value="string:voicerss.nl">(Voicerss) Dutch</option><option label="(Voicerss) English (Australia)" value="string:voicerss.en-au">(Voicerss) English (Australia)</option><option label="(Voicerss) English (Canada)" value="string:voicerss.en-ca">(Voicerss) English (Canada)</option><option label="(Voicerss) English (Great Britain)" value="string:voicerss.en-gb">(Voicerss) English (Great Britain)</option><option label="(Voicerss) English (India)" value="string:voicerss.en-in">(Voicerss) English (India)</option><option label="(Voicerss) English (United States)" value="string:voicerss.en">(Voicerss) English (United States)</option><option label="(Voicerss) Finnish" value="string:voicerss.fi">(Voicerss) Finnish</option><option label="(Voicerss) French (Canada)" value="string:voicerss.fr-ca">(Voicerss) French (Canada)</option><option label="(Voicerss) French (France)" value="string:voicerss.fr">(Voicerss) French (France)</option><option label="(Voicerss) German" value="string:voicerss.de">(Voicerss) German</option><option label="(Voicerss) Italian" value="string:voicerss.it">(Voicerss) Italian</option><option label="(Voicerss) Japanese" value="string:voicerss.ja">(Voicerss) Japanese</option><option label="(Voicerss) Korean" value="string:voicerss.ko">(Voicerss) Korean</option><option label="(Voicerss) Norwegian" value="string:voicerss.nb">(Voicerss) Norwegian</option><option label="(Voicerss) Polish" value="string:voicerss.pl">(Voicerss) Polish</option><option label="(Voicerss) Portuguese (Brazil)" value="string:voicerss.pt-br">(Voicerss) Portuguese (Brazil)</option><option label="(Voicerss) Portuguese (Portugal)" value="string:voicerss.pt">(Voicerss) Portuguese (Portugal)</option><option label="(Voicerss) Russian" value="string:voicerss.ru">(Voicerss) Russian</option><option label="(Voicerss) Spanish (Mexico)" value="string:voicerss.es-mx">(Voicerss) Spanish (Mexico)</option><option label="(Voicerss) Spanish (Spain)" value="string:voicerss.es">(Voicerss) Spanish (Spain)</option><option label="(Voicerss) Swedish (Sweden)" value="string:voicerss.sv">(Voicerss) Swedish (Sweden)</option></select>
+                                                                                            </div>
+                                                                                            <!--<div ng-show="form.ttslangs.$error.inRange" class="validation-warning"><span translate="selectedLanguageNotSupported"></span>: <strong>{{step.language}}</strong>. <span translate="pleaseChooseAnotherOne"></span>.</div>-->
+                                                                                            <!--<div ng-show="form.ttslangs.$error.outOfRange" class="validation-warning"><span translate="selectedLanguageNotSupported"></span>: <strong>{{step.language}}</strong>. <span translate="pleaseChooseAnotherOne"></span>.</div>-->
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-lg-5 form-group btn-toolbar voice" role="toolbar">
+                                                                                        <span class="btn-group">
+						<button ng-click="step.voice=&quot;man&quot;" ng-class="{active:step.voice=='man'}" type="button" class="btn btn-default man-button"><i class="fa fa-male"></i></button>
+						<button ng-click="step.voice=&quot;woman&quot;" ng-class="{active:step.voice=='woman'}" type="button" class="btn btn-default woman-button"><i class="fa fa-female"></i></button>
+					  </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 loop">
+                                                                                        <div class="input-group">
+                                                                                            <span class="input-group-addon help-tooltip ng-scope" tooltip-trigger="mouseenter" tooltip-popup-delay="1000" tooltip="How many times the text will be repeated. Default is '1'. '0' will loop until the call is hang up." translate="sayStepLoopLabel">Repeat # times</span>
+                                                                                            <input ng-model="step.loop" auto-clear="" type="number" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="1">
+                                                                                        </div>
+                                                                                        <div ng-show="step.loop==0" class="validation-warning ng-hide"><i class="fa fa-warning step-warning-icon"></i> <span translate="sayStepLoopNeverendingWarning" class="ng-scope">announcement will keep repeating infinitely!</span></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </ng-include>
+                                                            </div>
+                                                            <!-- end ngRepeat: step in node.steps -->
+                                                            <div id="step-step6" class="step ng-scope" ng-repeat="step in node.steps">
+                                                                <!-- ngInclude: -->
+                                                                <ng-include src="'templates/steps/' + step.kind + 'Step.html'" class="ng-scope">
+                                                                    <div class="step redirect-step panel panel-default ng-scope">
+                                                                        <div class="panel-heading">
+                                                                            <step-heading>
+                                                                                <h4 class="panel-title">
+                                                                                    <i ng-click="step.iface.isCollapsed = !step.iface.isCollapsed" class="fa rvd-clickable pull-left fa-caret-down" ng-class="{'fa-caret-right': step.iface.isCollapsed, 'fa-caret-down': !step.iface.isCollapsed}"></i>
+                                                                                    <i ng-click="removeStep(step,listModel)" class="fa fa-trash-o pull-right rvd-clickable cy-button-remove"></i>
+                                                                                    <div class="rvd-handle">
+                                                                                        &nbsp;
+                                                                                        <span title="step6" class="ng-binding">Redirect <span ng-show="getCurrentLanguage() !== 'en-US'" class="ng-binding ng-hide">(redirect)</span></span>
+                                                                                        <span ng-show="step.iface.isCollapsed" ng-transclude="" class="ng-hide"></span>
+                                                                                        <i ng-show="step.iface.showWarning" class="fa fa-warning step-warning-icon ng-hide"></i>
+                                                                                    </div>
+                                                                                </h4>
+                                                                            </step-heading>
+                                                                        </div>
+                                                                        <div class="panel-body" ng-hide="step.iface.isCollapsed">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <form name="form" novalidate="" class="ng-pristine ng-valid">
+                                                                                        <div class="input-group">
+                                                                                            <span class="input-group-addon ng-binding">Continue to</span>
+                                                                                            <module-url-picker url="step.url" module="step.next" class="ng-isolate-scope">
+                                                                                                <div class="module-url-picker">
+                                                                                                    <input readonly="" ng-show="activeType=='module'" type="text" class="form-control back-input ng-hide" title="choose a module form the list">
+                                                                                                    <input ng-show="activeType=='url'" ng-model="callbackUrl" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" title="type a url" placeholder="http://...">
+                                                                                                    <div ng-show="activeType=='module'" class="dropdown module-list ng-hide">
+                                                                                                        <span ng-show="!callbackModule" class="btn-link dropdown-toggle text-muted ng-binding" data-toggle="dropdown">-- no module selected --</span>
+                                                                                                        <span ng-show="callbackModule" class="btn-link dropdown-toggle ng-binding ng-hide" data-toggle="dropdown"></span>
+                                                                                                        <ul class="dropdown-menu">
+                                                                                                            <li><a ng-click="setModule()" class="rvd-clickable"><span class="text-muted ng-binding">-- no module selected --</span></a></li>
+                                                                                                            <!-- ngRepeat: module in modules -->
+                                                                                                            <li ng-repeat="module in modules" class="ng-scope"><a ng-click="setModule(module)" class="rvd-clickable-text ng-binding">Welcome</a></li>
+                                                                                                            <!-- end ngRepeat: module in modules -->
+                                                                                                        </ul>
+                                                                                                    </div>
+
+                                                                                                    <!-- ngIf: type=="any" -->
+                                                                                                    <div ng-if="type==&quot;any&quot;" class="dropdown picker-type ng-scope">
+                                                                                                        <small ng-show="activeType=='module'" class="btn-link dropdown-toggle var-scope ng-hide" data-toggle="dropdown" ng-class="{'switcher-inactive':false}" title="use an application module">module</small>
+                                                                                                        <small ng-show="activeType=='url'" class="btn-link dropdown-toggle var-scope" data-toggle="dropdown" ng-class="{'switcher-inactive':false}" title="use a raw url">URL</small>
+                                                                                                        <!--<small class="text-muted">{{varScope ? varScope : ""}}</small>-->
+                                                                                                        <ul class="dropdown-menu dropdown-menu-right">
+                                                                                                            <li><a ng-click="setActiveType('module')" class="rvd-clickable-text ng-binding" title="use an application module">Module</a></li>
+                                                                                                            <li><a ng-click="setActiveType('url')" class="rvd-clickable-text" title="use a raw url">URL</a></li>
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                    <!-- end ngIf: type=="any" -->
+                                                                                                </div>
+                                                                                            </module-url-picker>
+                                                                                            <span class="input-group-addon ng-binding">method</span>
+                                                                                            <select name="method" ng-model="step.method" auto-clear="" ng-options="method for method in methods" class="form-control ng-pristine ng-untouched ng-valid ng-empty"><option value="" class="" selected="selected"></option><option label="POST" value="string:POST">POST</option><option label="GET" value="string:GET">GET</option></select>
+                                                                                        </div>
+                                                                                        <div class="validation-error ng-binding ng-hide" ng-show="form.url.$invalid">Url is missing</div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </ng-include>
+                                                            </div>
+                                                            <!-- end ngRepeat: step in node.steps -->
+                                                            <div id="step-step1" class="step ng-scope" ng-repeat="step in node.steps">
+                                                                <!-- ngInclude: -->
+                                                                <ng-include src="'templates/steps/' + step.kind + 'Step.html'" class="ng-scope">
+                                                                    <div class="step say-step panel panel-default ng-scope">
+                                                                        <div class="panel-heading">
+                                                                            <step-heading>
+                                                                                <h4 class="panel-title">
+                                                                                    <i ng-click="step.iface.isCollapsed = !step.iface.isCollapsed" class="fa rvd-clickable pull-left fa-caret-down" ng-class="{'fa-caret-right': step.iface.isCollapsed, 'fa-caret-down': !step.iface.isCollapsed}"></i>
+                                                                                    <i ng-click="removeStep(step,listModel)" class="fa fa-trash-o pull-right rvd-clickable cy-button-remove"></i>
+                                                                                    <div class="rvd-handle">
+                                                                                        &nbsp;
+                                                                                        <span title="step1" class="ng-binding">Say <span ng-show="getCurrentLanguage() !== 'en-US'" class="ng-binding ng-hide">(say)</span></span>
+                                                                                        <span ng-show="step.iface.isCollapsed" ng-transclude="" class="ng-hide"><small class="ng-binding ng-scope">Welcome to Visual Designer</small></span>
+                                                                                        <i ng-show="step.iface.showWarning" class="fa fa-warning step-warning-icon ng-hide"></i>
+                                                                                    </div>
+                                                                                </h4>
+                                                                            </step-heading>
+                                                                        </div>
+                                                                        <div class="panel-body" ng-hide="step.iface.isCollapsed">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12 col-md-12">
+                                                                                    <grammarly-extension class="_1KJtL" style="position: absolute; top: 0px; left: 0px; pointer-events: none;"></grammarly-extension>
+                                                                                    <form lookup-context="" name="form" novalidate="" class="ng-pristine ng-valid ng-scope ng-valid-required">
+                                                                                        <div class="form-group tour-phrase">
+                                                                                            <label class="help-tooltip" tooltip="Type the text that will be read to the user. Prepend variables names with a dollar sign e.g. '$variablename'" tooltip-popup-delay="1000" tooltip-trigger="mouseenter"><span translate="sayStepTextLabel" class="ng-scope">Text</span></label>
+                                                                                            <textarea ng-model="step.phrase" lookup-target="" name="phrase" class="form-control cy-text-phrase ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched" required="" spellcheck="false"></textarea>
+                                                                                            <div ng-show="form.phrase.$invalid" class="validation-error ng-scope ng-hide" translate="sayStepTextValidationError">The phrase text is missing</div>
+                                                                                            <div class="validation-error pull-left text-muted ng-scope" translate="ssmlHint">Learn more about <a href="/docs/rcml/ssml-reference.html" target="_blank">SSML syntax</a> (Google or Amazon Polly text-to-speech engines)</div>
+                                                                                            <div tour-name="main" backdrop="tourStep.active" backdrop-selector="#step-step1 textarea" uib-popover-template="'templates/tour-step.html'" popover-is-open="tourStep.active" popover-class="tour-popover" popover-placement="bottom-left" popover-trigger="'none'"
+                                                                                                class="ng-scope"></div>
+                                                                                        </div>
+                                                                                        <div class="form-group pull-right">
+                                                                                            <div ng-class="{'input-group-btn':view=='input-group', 'btn-group':view=='standalone', 'variable-lookup':view=='input-group' }" variable="step.phrase" view="standalone" class="btn-group">
+                                                                                                <!-- ngIf: view=='standalone' --><button ng-if="view=='standalone'" type="button" class="btn btn-secondary dropdown-toggle ng-scope" data-toggle="dropdown" translate-attr="{title: 'variableLookupStandaloneButtonTitle'}"
+                                                                                                    title="insert VD variable">
+      <span translate="variableLookupStandaloneButton" class="ng-scope">Lookup variable</span> <span class="caret"></span>
+  </button>
+                                                                                                <!-- end ngIf: view=='standalone' -->
+                                                                                                <!-- ngIf: view=='input-group' -->
+                                                                                                <ul class="dropdown-menu" role="menu">
+                                                                                                    <!-- ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_AccountSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_ApiVersion</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Body</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallerName</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_CallTimestamp</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialCallDuration</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialCallSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialCallStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_DialRingDuration</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Digits</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Direction</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_FaxSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_FaxStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_ForwardedFrom</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_From</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_InstanceId</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_PublicRecordingUrl</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_RecordingDuration</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_RecordingUrl</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_ReferTarget</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_SmsSid</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_SmsStatus</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_To</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Transferee</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                    <li ng-repeat="variable in variables | orderBy:'name'" class="ng-scope">
+                                                                                                        <a ng-click="selectVariable(variable)" class="ng-binding">core_Transferor</a>
+                                                                                                    </li>
+                                                                                                    <!-- end ngRepeat: variable in variables | orderBy:'name' -->
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <i ng-click="step.iface.optionsVisible = !step.iface.optionsVisible" class="fa fa-cog rvd-clickable" ng-class="{'rvd-active': step.iface.optionsVisible }"></i>
+                                                                            <div uib-collapse="!step.iface.optionsVisible" class="collapse" style="height: 0px;" aria-expanded="false" aria-hidden="true">
+                                                                                <br>
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-5  form-group language">
+                                                                                        <form name="form" novalidate="" class="ng-pristine ng-valid">
+                                                                                            <div class="input-group">
+                                                                                                <span class="input-group-addon  ng-binding">Language</span>
+                                                                                                <select name="ttslangs" auto-clear="" ng-model="step.language" ng-options="language.name as language.label for language in ttsLangs" class="form-control say-language-dropdown cy-dropdown-languages ng-pristine ng-untouched ng-valid ng-empty"><option value="undefined:undefined" selected="selected"></option><option label="(Google) Arabic Wavenet A" value="string:google.ar-XA-Wavenet-A">(Google) Arabic Wavenet A</option><option label="(Google) Arabic Wavenet B" value="string:google.ar-XA-Wavenet-B">(Google) Arabic Wavenet B</option><option label="(Google) Arabic Wavenet A" value="string:google.ar-XA-Wavenet-C">(Google) Arabic Wavenet A</option><option label="(Google) Czech Wavenet A" value="string:google.cs-CZ-Wavenet-A">(Google) Czech Wavenet A</option><option label="(Google) Denmark Wavenet A" value="string:google.da-DK-Wavenet-A">(Google) Denmark Wavenet A</option><option label="(Google) German Wavenet A" value="string:google.de-DE-Wavenet-A">(Google) German Wavenet A</option><option label="(Google) German Wavenet B" value="string:google.de-DE-Wavenet-B">(Google) German Wavenet B</option><option label="(Google) German Wavenet C" value="string:google.de-DE-Wavenet-C">(Google) German Wavenet C</option><option label="(Google) German Wavenet D" value="string:google.de-DE-Wavenet-D">(Google) German Wavenet D</option><option label="(Google) Greek Wavenet A" value="string:google.el-GR-Wavenet-A">(Google) Greek Wavenet A</option><option label="(Google) Australian Wavenet A" value="string:google.en-AU-Wavenet-A">(Google) Australian Wavenet A</option><option label="(Google) Australian Wavenet B" value="string:google.en-AU-Wavenet-B">(Google) Australian Wavenet B</option><option label="(Google) Australian Wavenet C" value="string:google.en-AU-Wavenet-C">(Google) Australian Wavenet C</option><option label="(Google) Australian Wavenet D" value="string:google.en-AU-Wavenet-D">(Google) Australian Wavenet D</option><option label="(Google) English British Wavenet A" value="string:google.en-GB-Wavenet-A">(Google) English British Wavenet A</option><option label="(Google) English British Wavenet B" value="string:google.en-GB-Wavenet-B">(Google) English British Wavenet B</option><option label="(Google) English British Wavenet C" value="string:google.en-GB-Wavenet-C">(Google) English British Wavenet C</option><option label="(Google) English British Wavenet D" value="string:google.en-GB-Wavenet-D">(Google) English British Wavenet D</option><option label="(Google) English Indian Wavenet A" value="string:google.en-IN-Wavenet-A">(Google) English Indian Wavenet A</option><option label="(Google) English Indian Wavenet B" value="string:google.en-IN-Wavenet-B">(Google) English Indian Wavenet B</option><option label="(Google) English Indian Wavenet C" value="string:google.en-IN-Wavenet-C">(Google) English Indian Wavenet C</option><option label="(Google) English US Wavenet A" value="string:google.en-US-Wavenet-A">(Google) English US Wavenet A</option><option label="(Google) English US Wavenet B" value="string:google.en-US-Wavenet-B">(Google) English US Wavenet B</option><option label="(Google) English US Wavenet C" value="string:google.en-US-Wavenet-C">(Google) English US Wavenet C</option><option label="(Google) English US Wavenet D" value="string:google.en-US-Wavenet-D">(Google) English US Wavenet D</option><option label="(Google) English US Wavenet E" value="string:google.en-US-Wavenet-E">(Google) English US Wavenet E</option><option label="(Google) English US Wavenet F" value="string:google.en-US-Wavenet-F">(Google) English US Wavenet F</option><option label="(Google) Finnish Wavenet A" value="string:google.fi-FI-Wavenet-A">(Google) Finnish Wavenet A</option><option label="(Google) Philippian Wavenet A" value="string:google.fil-PH-Wavenet-A">(Google) Philippian Wavenet A</option><option label="(Google) French Canadian Wavenet A" value="string:google.fr-CA-Wavenet-A">(Google) French Canadian Wavenet A</option><option label="(Google) French Canadian Wavenet B" value="string:google.fr-CA-Wavenet-B">(Google) French Canadian Wavenet B</option><option label="(Google) French Canadian Wavenet C" value="string:google.fr-CA-Wavenet-C">(Google) French Canadian Wavenet C</option><option label="(Google) French Canadian Wavenet D" value="string:google.fr-CA-Wavenet-D">(Google) French Canadian Wavenet D</option><option label="(Google) French Wavenet A" value="string:google.fr-FR-Wavenet-A">(Google) French Wavenet A</option><option label="(Google) French Wavenet B" value="string:google.fr-FR-Wavenet-B">(Google) French Wavenet B</option><option label="(Google) French Wavenet C" value="string:google.fr-FR-Wavenet-C">(Google) French Wavenet C</option><option label="(Google) French Wavenet D" value="string:google.fr-FR-Wavenet-D">(Google) French Wavenet D</option><option label="(Google) Hindi Wavenet A" value="string:google.hi-IN-Wavenet-A">(Google) Hindi Wavenet A</option><option label="(Google) Hindi Wavenet B" value="string:google.hi-IN-Wavenet-B">(Google) Hindi Wavenet B</option><option label="(Google) Hindi Wavenet C" value="string:google.hi-IN-Wavenet-C">(Google) Hindi Wavenet C</option><option label="(Google) Hungarian Wavenet A" value="string:google.hu-HU-Wavenet-A">(Google) Hungarian Wavenet A</option><option label="(Google) Bahasa Indonesia Wavenet A" value="string:google.id-ID-Wavenet-A">(Google) Bahasa Indonesia Wavenet A</option><option label="(Google) Bahasa Indonesia Wavenet B" value="string:google.id-ID-Wavenet-B">(Google) Bahasa Indonesia Wavenet B</option><option label="(Google) Bahasa Indonesia Wavenet C" value="string:google.id-ID-Wavenet-C">(Google) Bahasa Indonesia Wavenet C</option><option label="(Google) Italian Wavenet A" value="string:google.it-IT-Wavenet-A">(Google) Italian Wavenet A</option><option label="(Google) Italian Wavenet B" value="string:google.it-IT-Wavenet-B">(Google) Italian Wavenet B</option><option label="(Google) Italian Wavenet C" value="string:google.it-IT-Wavenet-C">(Google) Italian Wavenet C</option><option label="(Google) Italian Wavenet D" value="string:google.it-IT-Wavenet-D">(Google) Italian Wavenet D</option><option label="(Google) Japanese Wavenet A" value="string:google.ja-JP-Wavenet-A">(Google) Japanese Wavenet A</option><option label="(Google) Japanese Wavenet B" value="string:google.ja-JP-Wavenet-B">(Google) Japanese Wavenet B</option><option label="(Google) Japanese Wavenet C" value="string:google.ja-JP-Wavenet-C">(Google) Japanese Wavenet C</option><option label="(Google) Japanese Wavenet D" value="string:google.ja-JP-Wavenet-D">(Google) Japanese Wavenet D</option><option label="(Google) Korean Wavenet A" value="string:google.ko-KR-Wavenet-A">(Google) Korean Wavenet A</option><option label="(Google) Korean Wavenet B" value="string:google.ko-KR-Wavenet-B">(Google) Korean Wavenet B</option><option label="(Google) Korean Wavenet C" value="string:google.ko-KR-Wavenet-C">(Google) Korean Wavenet C</option><option label="(Google) Korean Wavenet D" value="string:google.ko-KR-Wavenet-D">(Google) Korean Wavenet D</option><option label="(Google) Norwegian Wavenet A" value="string:google.nb-NO-Wavenet-A">(Google) Norwegian Wavenet A</option><option label="(Google) Norwegian Wavenet B" value="string:google.nb-NO-Wavenet-B">(Google) Norwegian Wavenet B</option><option label="(Google) Norwegian Wavenet C" value="string:google.nb-NO-Wavenet-C">(Google) Norwegian Wavenet C</option><option label="(Google) Norwegian Wavenet D" value="string:google.nb-NO-Wavenet-D">(Google) Norwegian Wavenet D</option><option label="(Google) Norwegian Wavenet E" value="string:google.nb-no-Wavenet-E">(Google) Norwegian Wavenet E</option><option label="(Google) Nederland Wavenet A" value="string:google.nl-NL-Wavenet-A">(Google) Nederland Wavenet A</option><option label="(Google) Nederland Wavenet B" value="string:google.nl-NL-Wavenet-B">(Google) Nederland Wavenet B</option><option label="(Google) Nederland Wavenet C" value="string:google.nl-NL-Wavenet-C">(Google) Nederland Wavenet C</option><option label="(Google) Nederland Wavenet D" value="string:google.nl-NL-Wavenet-D">(Google) Nederland Wavenet D</option><option label="(Google) Nederland Wavenet E" value="string:google.nl-NL-Wavenet-E">(Google) Nederland Wavenet E</option><option label="(Google) Polish Wavenet A" value="string:google.pl-PL-Wavenet-A">(Google) Polish Wavenet A</option><option label="(Google) Polish Wavenet B" value="string:google.pl-PL-Wavenet-B">(Google) Polish Wavenet B</option><option label="(Google) Polish Wavenet C" value="string:google.pl-PL-Wavenet-C">(Google) Polish Wavenet C</option><option label="(Google) Polish Wavenet D" value="string:google.pl-PL-Wavenet-D">(Google) Polish Wavenet D</option><option label="(Google) Polish Wavenet E" value="string:google.pl-PL-Wavenet-E">(Google) Polish Wavenet E</option><option label="(Google) Brazilian Wavenet A" value="string:google.pt-BR-Wavenet-A">(Google) Brazilian Wavenet A</option><option label="(Google) Portuguese Wavenet A" value="string:google.pt-PT-Wavenet-A">(Google) Portuguese Wavenet A</option><option label="(Google) Portuguese Wavenet B" value="string:google.pt-PT-Wavenet-B">(Google) Portuguese Wavenet B</option><option label="(Google) Portuguese Wavenet C" value="string:google.pt-PT-Wavenet-C">(Google) Portuguese Wavenet C</option><option label="(Google) Portuguese Wavenet D" value="string:google.pt-PT-Wavenet-D">(Google) Portuguese Wavenet D</option><option label="(Google) Russian Wavenet A" value="string:google.ru-RU-Wavenet-A">(Google) Russian Wavenet A</option><option label="(Google) Russian Wavenet B" value="string:google.ru-RU-Wavenet-B">(Google) Russian Wavenet B</option><option label="(Google) Russian Wavenet C" value="string:google.ru-RU-Wavenet-C">(Google) Russian Wavenet C</option><option label="(Google) Russian Wavenet D" value="string:google.ru-RU-Wavenet-D">(Google) Russian Wavenet D</option><option label="(Google) Slovak Wavenet A" value="string:google.sk-SK-Wavenet-A">(Google) Slovak Wavenet A</option><option label="(Google) Swedish Wavenet A" value="string:google.sv-SE-Wavenet-A">(Google) Swedish Wavenet A</option><option label="(Google) Turkish Wavenet A" value="string:google.tr-TR-Wavenet-A">(Google) Turkish Wavenet A</option><option label="(Google) Turkish Wavenet B" value="string:google.tr-TR-Wavenet-B">(Google) Turkish Wavenet B</option><option label="(Google) Turkish Wavenet C" value="string:google.tr-TR-Wavenet-C">(Google) Turkish Wavenet C</option><option label="(Google) Turkish Wavenet D" value="string:google.tr-TR-Wavenet-D">(Google) Turkish Wavenet D</option><option label="(Google) Turkish Wavenet E" value="string:google.tr-TR-Wavenet-E">(Google) Turkish Wavenet E</option><option label="(Google) Ukrainian Wavenet A" value="string:google.uk-UA-Wavenet-A">(Google) Ukrainian Wavenet A</option><option label="(Google) Vietnamese Wavenet A" value="string:google.vi-VN-Wavenet-A">(Google) Vietnamese Wavenet A</option><option label="(Google) Vietnamese Wavenet B" value="string:google.vi-VN-Wavenet-B">(Google) Vietnamese Wavenet B</option><option label="(Google) Vietnamese Wavenet C" value="string:google.vi-VN-Wavenet-C">(Google) Vietnamese Wavenet C</option><option label="(Google) Vietnamese Wavenet D" value="string:google.vi-VN-Wavenet-D">(Google) Vietnamese Wavenet D</option><option label="(Google) Spanish Standard A" value="string:google.es-ES-Standard-A">(Google) Spanish Standard A</option><option label="(Google) Arabic Standard A" value="string:google.ar-XA-Standard-A">(Google) Arabic Standard A</option><option label="(Google) Arabic Standard B" value="string:google.ar-XA-Standard-B">(Google) Arabic Standard B</option><option label="(Google) Arabic Standard C" value="string:google.ar-XA-Standard-C">(Google) Arabic Standard C</option><option label="(Google) Italian Standard A" value="string:google.it-IT-Standard-A">(Google) Italian Standard A</option><option label="(Google) Russian Standard A" value="string:google.ru-RU-Standard-A">(Google) Russian Standard A</option><option label="(Google) Russian Standard B" value="string:google.ru-RU-Standard-B">(Google) Russian Standard B</option><option label="(Google) Russian Standard C" value="string:google.ru-RU-Standard-C">(Google) Russian Standard C</option><option label="(Google) Russian Standard D" value="string:google.ru-RU-Standard-D">(Google) Russian Standard D</option><option label="(Google) Chinese Mandarin Standard A" value="string:google.cmn-CN-Standard-A">(Google) Chinese Mandarin Standard A</option><option label="(Google) Chinese Mandarin Standard B" value="string:google.cmn-CN-Standard-B">(Google) Chinese Mandarin Standard B</option><option label="(Google) Chiinese Mandarin Standard C" value="string:google.cmn-CN-Standard-C">(Google) Chiinese Mandarin Standard C</option><option label="(Google) Korean Standard A" value="string:google.ko-KR-Standard-A">(Google) Korean Standard A</option><option label="(Google) Korean Standard B" value="string:google.ko-KR-Standard-B">(Google) Korean Standard B</option><option label="(Google) Korean Standard C" value="string:google.ko-KR-Standard-C">(Google) Korean Standard C</option><option label="(Google) Korean Standard D" value="string:google.ko-KR-Standard-D">(Google) Korean Standard D</option><option label="(Google) Japanese Standard A" value="string:google.ja-JP-Standard-A">(Google) Japanese Standard A</option><option label="(Google) Japanese Standard B" value="string:google.ja-JP-Standard-B">(Google) Japanese Standard B</option><option label="(Google) Japanese Standard C" value="string:google.ja-JP-Standard-C">(Google) Japanese Standard C</option><option label="(Google) Japanese Standard D" value="string:google.ja-JP-Standard-D">(Google) Japanese Standard D</option><option label="(Google) Vietnamese Standard A" value="string:google.vi-VN-Standard-A">(Google) Vietnamese Standard A</option><option label="(Google) Vietnamese Standard B" value="string:google.vi-VN-Standard-B">(Google) Vietnamese Standard B</option><option label="(Google) Vietnamese Standard C" value="string:google.vi-VN-Standard-C">(Google) Vietnamese Standard C</option><option label="(Google) Vietnamese Standard D" value="string:google.vi-VN-Standard-D">(Google) Vietnamese Standard D</option><option label="(Google) Philippian Standard A" value="string:google.fil-PH-Standard-A">(Google) Philippian Standard A</option><option label="(Google) Bahasa Indonesia Standard A" value="string:google.id-ID-Standard-A">(Google) Bahasa Indonesia Standard A</option><option label="(Google) Bahasa Indonesia Standard B" value="string:google.id-ID-Standard-B">(Google) Bahasa Indonesia Standard B</option><option label="(Google) Bahasa Indonesia Standard C" value="string:google.id-ID-Standard-C">(Google) Bahasa Indonesia Standard C</option><option label="(Google) Nederland Standard A" value="string:google.nl-NL-Standard-A">(Google) Nederland Standard A</option><option label="(Google) Nederland Standard B" value="string:google.nl-NL-Standard-B">(Google) Nederland Standard B</option><option label="(Google) Nederland Standard C" value="string:google.nl-NL-Standard-C">(Google) Nederland Standard C</option><option label="(Google) Nederland Standard D" value="string:google.nl-NL-Standard-D">(Google) Nederland Standard D</option><option label="(Google) Nederland Standard E" value="string:google.nl-NL-Standard-E">(Google) Nederland Standard E</option><option label="(Google) Czech Standard A" value="string:google.cs-CZ-Standard-A">(Google) Czech Standard A</option><option label="(Google) Greek Standard A" value="string:google.el-GR-Standard-A">(Google) Greek Standard A</option><option label="(Google) Brazilian Standard A" value="string:google.pt-BR-Standard-A">(Google) Brazilian Standard A</option><option label="(Google) Hungarian Standard A" value="string:google.hu-HU-Standard-A">(Google) Hungarian Standard A</option><option label="(Google) Polish Standard A" value="string:google.pl-PL-Standard-A">(Google) Polish Standard A</option><option label="(Google) Polish Standard B" value="string:google.pl-PL-Standard-B">(Google) Polish Standard B</option><option label="(Google) Polish Standard C" value="string:google.pl-PL-Standard-C">(Google) Polish Standard C</option><option label="(Google) Polish Standard D" value="string:google.pl-PL-Standard-D">(Google) Polish Standard D</option><option label="(Google) Polish Standard E" value="string:google.pl-PL-Standard-E">(Google) Polish Standard E</option><option label="(Google) Slovak Standard A" value="string:google.sk-SK-Standard-A">(Google) Slovak Standard A</option><option label="(Google) Turkish Standard A" value="string:google.tr-TR-Standard-A">(Google) Turkish Standard A</option><option label="(Google) Turkish Standard B" value="string:google.tr-TR-Standard-B">(Google) Turkish Standard B</option><option label="(Google) Turkish Standard C" value="string:google.tr-TR-Standard-C">(Google) Turkish Standard C</option><option label="(Google) Turkish Standard D" value="string:google.tr-TR-Standard-D">(Google) Turkish Standard D</option><option label="(Google) Turkish Standard E" value="string:google.tr-TR-Standard-E">(Google) Turkish Standard E</option><option label="(Google) Ukrainian Standard A" value="string:google.uk-UA-Standard-A">(Google) Ukrainian Standard A</option><option label="(Google) English Indian Standard A" value="string:google.en-IN-Standard-A">(Google) English Indian Standard A</option><option label="(Google) English Indian Standard B" value="string:google.en-IN-Standard-B">(Google) English Indian Standard B</option><option label="(Google) English Indian Standard C" value="string:google.en-IN-Standard-C">(Google) English Indian Standard C</option><option label="(Google) Hindi Standard A" value="string:google.hi-IN-Standard-A">(Google) Hindi Standard A</option><option label="(Google) Hindi Standard B" value="string:google.hi-IN-Standard-B">(Google) Hindi Standard B</option><option label="(Google) Hindi Standard C" value="string:google.hi-IN-Standard-C">(Google) Hindi Standard C</option><option label="(Google) Denmark Standard A" value="string:google.da-DK-Standard-A">(Google) Denmark Standard A</option><option label="(Google) Finish Standard A" value="string:google.fi-FI-Standard-A">(Google) Finish Standard A</option><option label="(Google) Portuguese Standard A" value="string:google.pt-PT-Standard-A">(Google) Portuguese Standard A</option><option label="(Google) Portuguese Standard B" value="string:google.pt-PT-Standard-B">(Google) Portuguese Standard B</option><option label="(Google) Portuguese Standard C" value="string:google.pt-PT-Standard-C">(Google) Portuguese Standard C</option><option label="(Google) Portuguese Standard D" value="string:google.pt-PT-Standard-D">(Google) Portuguese Standard D</option><option label="(Google) Norwegian Standard A" value="string:google.nb-NO-Standard-A">(Google) Norwegian Standard A</option><option label="(Google) Norwegian Standard B" value="string:google.nb-NO-Standard-B">(Google) Norwegian Standard B</option><option label="(Google) Norwegian Standard C" value="string:google.nb-NO-Standard-C">(Google) Norwegian Standard C</option><option label="(Google) Norwegian Standard D" value="string:google.nb-NO-Standard-D">(Google) Norwegian Standard D</option><option label="(Google) Norwegian Standard E" value="string:google.nb-no-Standard-E">(Google) Norwegian Standard E</option><option label="(Google) Swedish Standard A" value="string:google.sv-SE-Standard-A">(Google) Swedish Standard A</option><option label="(Google) English British Standard A" value="string:google.en-GB-Standard-A">(Google) English British Standard A</option><option label="(Google) English British Standard B" value="string:google.en-GB-Standard-B">(Google) English British Standard B</option><option label="(Google) English British Standard C" value="string:google.en-GB-Standard-C">(Google) English British Standard C</option><option label="(Google) English British Standard D" value="string:google.en-GB-Standard-D">(Google) English British Standard D</option><option label="(Google) English US Standard B" value="string:google.en-US-Standard-B">(Google) English US Standard B</option><option label="(Google) English US Standard C" value="string:google.en-US-Standard-C">(Google) English US Standard C</option><option label="(Google) English US Standard D" value="string:google.en-US-Standard-D">(Google) English US Standard D</option><option label="(Google) English US Standard E" value="string:google.en-US-Standard-E">(Google) English US Standard E</option><option label="(Google) German Standard A" value="string:google.de-DE-Standard-A">(Google) German Standard A</option><option label="(Google) German Standard B" value="string:google.de-DE-Standard-B">(Google) German Standard B</option><option label="(Google) English Australian Standard A" value="string:google.en-AU-Standard-A">(Google) English Australian Standard A</option><option label="(Google) English Australian Standard B" value="string:google.en-AU-Standard-B">(Google) English Australian Standard B</option><option label="(Google) English Australian Standard C" value="string:google.en-AU-Standard-C">(Google) English Australian Standard C</option><option label="(Google) English Australian Standard D" value="string:google.en-AU-Standard-D">(Google) English Australian Standard D</option><option label="(Google) French Canadian Standard A" value="string:google.fr-CA-Standard-A">(Google) French Canadian Standard A</option><option label="(Google) French Canadian Standard B" value="string:google.fr-CA-Standard-B">(Google) French Canadian Standard B</option><option label="(Google) French Canadian Standard C" value="string:google.fr-CA-Standard-C">(Google) French Canadian Standard C</option><option label="(Google) French Canadian Standard D" value="string:google.fr-CA-Standard-D">(Google) French Canadian Standard D</option><option label="(Google) French Standard A" value="string:google.fr-FR-Standard-A">(Google) French Standard A</option><option label="(Google) French Standard B" value="string:google.fr-FR-Standard-B">(Google) French Standard B</option><option label="(Google) French Standard C" value="string:google.fr-FR-Standard-C">(Google) French Standard C</option><option label="(Google) French Standard D" value="string:google.fr-FR-Standard-D">(Google) French Standard D</option><option label="(Google) Italian Standard B" value="string:google.it-IT-Standard-B">(Google) Italian Standard B</option><option label="(Google) Italian Standard C" value="string:google.it-IT-Standard-C">(Google) Italian Standard C</option><option label="(Google) Italian Standard D" value="string:google.it-IT-Standard-D">(Google) Italian Standard D</option><option label="(AWS Polly) Chinese, Mandarin" value="string:awspolly.cmn-CN">(AWS Polly) Chinese, Mandarin</option><option label="(AWS Polly) Danish" value="string:awspolly.da-DK">(AWS Polly) Danish</option><option label="(AWS Polly) Dutch" value="string:awspolly.nl-NL">(AWS Polly) Dutch</option><option label="(AWS Polly) English, Australian" value="string:awspolly.en-AU">(AWS Polly) English, Australian</option><option label="(AWS Polly) English, British" value="string:awspolly.en-GB">(AWS Polly) English, British</option><option label="(AWS Polly) English, Indian" value="string:awspolly.en-IN">(AWS Polly) English, Indian</option><option label="(AWS Polly) English, US" value="string:awspolly.en-US">(AWS Polly) English, US</option><option label="(AWS Polly) English, Welsh" value="string:awspolly.en-GB-WLS">(AWS Polly) English, Welsh</option><option label="(AWS Polly) French" value="string:awspolly.fr-FR">(AWS Polly) French</option><option label="(AWS Polly) French, Canadian" value="string:awspolly.fr-CA">(AWS Polly) French, Canadian</option><option label="(AWS Polly) German" value="string:awspolly.de-DE">(AWS Polly) German</option><option label="(AWS Polly) Hindi" value="string:awspolly.hi-IN">(AWS Polly) Hindi</option><option label="(AWS Polly) Icelandic" value="string:awspolly.is-IS">(AWS Polly) Icelandic</option><option label="(AWS Polly) Italian" value="string:awspolly.it-IT">(AWS Polly) Italian</option><option label="(AWS Polly) Japanese" value="string:awspolly.ja-JP">(AWS Polly) Japanese</option><option label="(AWS Polly) Korean" value="string:awspolly.ko-KR">(AWS Polly) Korean</option><option label="(AWS Polly) Norwegian" value="string:awspolly.nb-NO">(AWS Polly) Norwegian</option><option label="(AWS Polly) Polish" value="string:awspolly.pl-PL">(AWS Polly) Polish</option><option label="(AWS Polly) Portuguese, Brazilian" value="string:awspolly.pt-BR">(AWS Polly) Portuguese, Brazilian</option><option label="(AWS Polly) Portuguese, European" value="string:awspolly.pt-PT">(AWS Polly) Portuguese, European</option><option label="(AWS Polly) Romanian" value="string:awspolly.ro-RO">(AWS Polly) Romanian</option><option label="(AWS Polly) Russian" value="string:awspolly.ru-RU">(AWS Polly) Russian</option><option label="(AWS Polly) Spanish, European" value="string:awspolly.es-ES">(AWS Polly) Spanish, European</option><option label="(AWS Polly) Spanish, Mexican" value="string:awspolly.es-MX">(AWS Polly) Spanish, Mexican</option><option label="(AWS Polly) Spanish, US" value="string:awspolly.es-US">(AWS Polly) Spanish, US</option><option label="(AWS Polly) Swedish" value="string:awspolly.sv-SE">(AWS Polly) Swedish</option><option label="(AWS Polly) Turkish" value="string:awspolly.tr-TR">(AWS Polly) Turkish</option><option label="(AWS Polly) Welsh" value="string:awspolly.cy-GB">(AWS Polly) Welsh</option><option label="(Acapela) Belgium-French" value="string:acapela.bf">(Acapela) Belgium-French</option><option label="(Acapela) Brazilian-Portugues" value="string:acapela.bp">(Acapela) Brazilian-Portugues</option><option label="(Acapela) British-English" value="string:acapela.en-gb">(Acapela) British-English</option><option label="(Acapela) Canadian-French" value="string:acapela.cf">(Acapela) Canadian-French</option><option label="(Acapela) Chinese" value="string:acapela.zh-cn">(Acapela) Chinese</option><option label="(Acapela) Czech" value="string:acapela.cs">(Acapela) Czech</option><option label="(Acapela) Dannish" value="string:acapela.dan">(Acapela) Dannish</option><option label="(Acapela) English" value="string:acapela.en">(Acapela) English</option><option label="(Acapela) Finnish" value="string:acapela.fi">(Acapela) Finnish</option><option label="(Acapela) Spanish" value="string:acapela.es">(Acapela) Spanish</option><option label="(Acapela) French" value="string:acapela.fr">(Acapela) French</option><option label="(Acapela) German" value="string:acapela.de">(Acapela) German</option><option label="(Acapela) Greek" value="string:acapela.el">(Acapela) Greek</option><option label="(Acapela) Italian" value="string:acapela.it">(Acapela) Italian</option><option label="(Acapela) Netherlands-Dutch" value="string:acapela.nl">(Acapela) Netherlands-Dutch</option><option label="(Acapela) Japanese" value="string:acapela.ja">(Acapela) Japanese</option><option label="(Acapela) Norwegian" value="string:acapela.no">(Acapela) Norwegian</option><option label="(Acapela) Polish" value="string:acapela.pl">(Acapela) Polish</option><option label="(Acapela) Portuguese" value="string:acapela.pt">(Acapela) Portuguese</option><option label="(Acapela) Russian" value="string:acapela.ru">(Acapela) Russian</option><option label="(Acapela) Saudi-Arabia Arabic" value="string:acapela.ar">(Acapela) Saudi-Arabia Arabic</option><option label="(Acapela) Spain Catalan" value="string:acapela.ca">(Acapela) Spain Catalan</option><option label="(Acapela) Swedish" value="string:acapela.sv">(Acapela) Swedish</option><option label="(Acapela) Turkish" value="string:acapela.tr">(Acapela) Turkish</option><option label="(Voicerss) Catalan" value="string:voicerss.ca">(Voicerss) Catalan</option><option label="(Voicerss) Chinese (China)" value="string:voicerss.zh-cn">(Voicerss) Chinese (China)</option><option label="(Voicerss) Chinese (Hong Kong)" value="string:voicerss.zh-hk">(Voicerss) Chinese (Hong Kong)</option><option label="(Voicerss) Chinese (Taiwan)" value="string:voicerss.zh-tw">(Voicerss) Chinese (Taiwan)</option><option label="(Voicerss) Danish" value="string:voicerss.da">(Voicerss) Danish</option><option label="(Voicerss) Dutch" value="string:voicerss.nl">(Voicerss) Dutch</option><option label="(Voicerss) English (Australia)" value="string:voicerss.en-au">(Voicerss) English (Australia)</option><option label="(Voicerss) English (Canada)" value="string:voicerss.en-ca">(Voicerss) English (Canada)</option><option label="(Voicerss) English (Great Britain)" value="string:voicerss.en-gb">(Voicerss) English (Great Britain)</option><option label="(Voicerss) English (India)" value="string:voicerss.en-in">(Voicerss) English (India)</option><option label="(Voicerss) English (United States)" value="string:voicerss.en">(Voicerss) English (United States)</option><option label="(Voicerss) Finnish" value="string:voicerss.fi">(Voicerss) Finnish</option><option label="(Voicerss) French (Canada)" value="string:voicerss.fr-ca">(Voicerss) French (Canada)</option><option label="(Voicerss) French (France)" value="string:voicerss.fr">(Voicerss) French (France)</option><option label="(Voicerss) German" value="string:voicerss.de">(Voicerss) German</option><option label="(Voicerss) Italian" value="string:voicerss.it">(Voicerss) Italian</option><option label="(Voicerss) Japanese" value="string:voicerss.ja">(Voicerss) Japanese</option><option label="(Voicerss) Korean" value="string:voicerss.ko">(Voicerss) Korean</option><option label="(Voicerss) Norwegian" value="string:voicerss.nb">(Voicerss) Norwegian</option><option label="(Voicerss) Polish" value="string:voicerss.pl">(Voicerss) Polish</option><option label="(Voicerss) Portuguese (Brazil)" value="string:voicerss.pt-br">(Voicerss) Portuguese (Brazil)</option><option label="(Voicerss) Portuguese (Portugal)" value="string:voicerss.pt">(Voicerss) Portuguese (Portugal)</option><option label="(Voicerss) Russian" value="string:voicerss.ru">(Voicerss) Russian</option><option label="(Voicerss) Spanish (Mexico)" value="string:voicerss.es-mx">(Voicerss) Spanish (Mexico)</option><option label="(Voicerss) Spanish (Spain)" value="string:voicerss.es">(Voicerss) Spanish (Spain)</option><option label="(Voicerss) Swedish (Sweden)" value="string:voicerss.sv">(Voicerss) Swedish (Sweden)</option></select>
+                                                                                            </div>
+                                                                                            <!--<div ng-show="form.ttslangs.$error.inRange" class="validation-warning"><span translate="selectedLanguageNotSupported"></span>: <strong>{{step.language}}</strong>. <span translate="pleaseChooseAnotherOne"></span>.</div>-->
+                                                                                            <!--<div ng-show="form.ttslangs.$error.outOfRange" class="validation-warning"><span translate="selectedLanguageNotSupported"></span>: <strong>{{step.language}}</strong>. <span translate="pleaseChooseAnotherOne"></span>.</div>-->
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-lg-5 form-group btn-toolbar voice" role="toolbar">
+                                                                                        <span class="btn-group">
+                                                                                            <button ng-click="step.voice=&quot;man&quot;" ng-class="{active:step.voice=='man'}" type="button" class="btn btn-default man-button"><i class="fa fa-male"></i></button>
+                                                                                            <button ng-click="step.voice=&quot;woman&quot;" ng-class="{active:step.voice=='woman'}" type="button" class="btn btn-default woman-button"><i class="fa fa-female"></i></button>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 loop">
+                                                                                        <div class="input-group">
+                                                                                            <span class="input-group-addon help-tooltip ng-scope" tooltip-trigger="mouseenter" tooltip-popup-delay="1000" tooltip="How many times the text will be repeated. Default is '1'. '0' will loop until the call is hang up." translate="sayStepLoopLabel">Repeat # times</span>
+                                                                                            <input ng-model="step.loop" auto-clear="" type="number" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="1">
+                                                                                        </div>
+                                                                                        <div ng-show="step.loop==0" class="validation-warning ng-hide"><i class="fa fa-warning step-warning-icon"></i> <span translate="sayStepLoopNeverendingWarning" class="ng-scope">announcement will keep repeating infinitely!</span></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </ng-include>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-include>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>
