@@ -1,0 +1,88 @@
+<div class="main-container">
+  <div class="save-btn-container">
+    <button class="btn" (click)="save()">Save</button>
+  </div>
+  <div class="vd">
+    <div class="vd__left">
+      <div class="vd__left-title">
+        Visual Designer
+      </div>
+      <div class="vd__left-item-list">
+        <div class="vd__left-item draggable" [attr.data-id]="item.id" *ngFor="let item of leftItems">
+          <i class="fa fa-{{item.icon}}"></i>
+          <span class="pl-2">{{ item.text }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="vd__right">
+      <div class="vd-tab-title-list">
+        <div class="vd-tab-title">
+          <span class="pr-2">Welcome</span>
+          <i class="fa fa-trash-o pr-2"></i>
+          <i class="fa fa-sort-desc"></i>
+        </div>
+      </div>
+      <div class="vd-tab-conent sortable">
+        <div *ngFor="let item of rightItems; let i = index" [attr.data-id]="item.id" [id]="item._id">
+          <div class="vd-collasable">
+            <div class="vd-collasable__title">
+              <span class="d-flex flex-grow-1">
+                <i class="fa fa-sort-desc" [ngStyle]="{'transform': item.collapsed ? 'rotate(-90deg)' : '' }"
+                  style="cursor: pointer; transition: all 200ms ease-out;" (click)="item.collapsed = !item.collapsed"></i>
+                <span class="flex-grow-1 handle pl-2">{{ item.text }}</span>
+              </span>
+              <i class="fa fa-trash-o" style="cursor: pointer;" (click)="removePanel(i)"></i>
+            </div>
+            <div class="vd-collasable__content" [style.display]="item.collapsed ? 'none' : ''">
+              <ng-container [ngSwitch]="item.id">
+                <ng-template [ngSwitchCase]="'Say'">
+                  <app-say [item]="item"></app-say>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Play'">
+                  <app-play [item]="item"></app-play>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Dial'">
+                  <app-dail [item]="item"></app-dail>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Control'">
+                  <app-control [item]="item"></app-control>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Log'">
+                  <app-log [item]="item"></app-log>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Reject'">
+                  <app-reject [item]="item"></app-reject>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Pause'">
+                  <app-pause [item]="item"></app-pause>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Redirect'">
+                  <app-redirect [item]="item"></app-redirect>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'SMS'">
+                  <app-sms [item]="item"></app-sms>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Email'">
+                  <app-email [item]="item"></app-email>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Record'">
+                  <app-record [item]="item"></app-record>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'Collect'">
+                  <app-collect [item]="item"></app-collect>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'ExternalService'">
+                  <app-external-service [item]="item"></app-external-service>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'HangUp'">
+                  <app-hung-up [item]="item"></app-hung-up>
+                </ng-template>
+                <div *ngSwitchDefault>{{ item.text }}</div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

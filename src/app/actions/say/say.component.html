@@ -1,0 +1,50 @@
+<div class="form-group">
+  <label for="text">Text</label>
+  <textarea class="form-control" id="text" rows="3" name="text" [(ngModel)]="model.text"></textarea>
+  <div class="validation-error" translate="ssmlHint">Learn more about <a href="javascript:;" target="_blank">SSML
+      syntax</a> (Google or Amazon Polly text-to-speech
+    engines)</div>
+</div>
+<div class="say-lookup-variable">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="localVarDropdown" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Lookup Variable
+    </button>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="localVarDropdown">
+      <a class="dropdown-item" href="#" *ngFor="let lockupVar of lockupVarsList"
+        (click)="addLookupVar(lockupVar)">{{ lockupVar }}</a>
+    </div>
+  </div>
+</div>
+<i class="fa fa-cog setting-toogle" [class.active]="settingActive" (click)="settingActive = !settingActive"
+  href="#saySettings"></i>
+<div class="mt-4" [style.display]="settingActive ? '' : 'none'">
+  <div class="lang-voice">
+    <div class="input-group w-auto">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="language">Language</label>
+      </div>
+      <select class="custom-select" id="language" name="language" [(ngModel)]="model.language">
+        <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+      </select>
+    </div>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary" [class.active]="model.voice === 'man'" (click)="model.voice = 'man'">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="fa fa-male"></i>
+      </label>
+      <label class="btn btn-secondary" [class.active]="model.voice === 'woman'" (click)="model.voice = 'woman'">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="fa fa-male"></i>
+      </label>
+    </div>
+  </div>
+  <div class="loop d-flex">
+    <div class="input-group mb-3 w-auto">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="loop">Repeat # times</span>
+      </div>
+      <input type="number" name="loop" [(ngModel)]="model.loop" class="form-control" placeholder="1"
+        aria-describedby="loop">
+    </div>
+  </div>
+</div>

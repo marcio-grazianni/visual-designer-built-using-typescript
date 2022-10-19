@@ -1,0 +1,22 @@
+@import "../../../utils.scss";
+
+.row-1 {
+  display: flex;
+  margin: 1rem 0;
+  & > * {
+    margin-right: 0.7rem;
+  }
+  @include media-breakpoint("lt-md") {
+    flex-direction: column;
+    & > * {
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+    }
+  }
+  .input-1 {
+    flex: 30%;
+  }
+  .input-2 {
+    flex: 70%;
+  }
+}

@@ -1,0 +1,61 @@
+@import "../../../utils.scss";
+
+.condition {
+  display: flex;
+  margin: 0.7rem 0;
+  &>* {
+    margin-right: 0.7rem;
+  }
+  @include media-breakpoint("lt-md") {
+    flex-direction: column;
+    &>* {
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+    }
+  }
+  .input-1 {
+    flex: 30%;
+  }
+  .input-2 {
+    flex: 20%;
+  }
+  .input-3 {
+    flex: 20%;
+  }
+  .input-4 {
+    flex: 50%;
+  }
+  .input-5 {
+    flex: 50%
+  }
+}
+
+.action {
+  display: flex;
+  margin: 0.7rem 0;
+  &>* {
+    margin-right: 0.7rem;
+  }
+  @include media-breakpoint("lt-md") {
+    flex-direction: column;
+    &>* {
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+    }
+  }
+  .input-1 {
+    flex: 30%;
+  }
+  .input-2 {
+    flex: 30%;
+  }
+  .input-3 {
+    flex: 30%;
+  }
+  .input-4 {
+    flex: 50%;
+  }
+  .input-5 {
+    flex: 50%
+  }
+}

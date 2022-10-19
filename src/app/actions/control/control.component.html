@@ -1,0 +1,125 @@
+<div class="condition-list pb-4 border-bottom">
+  <div class="section-title">Conditions</div>
+  <div class="condition" *ngFor="let condition of model.conditions; let i = index">
+    <div class="input-1">
+      <select class="custom-select input-1" [(ngModel)]="condition.condition">
+        <option value="equal">equal</option>
+        <option value="not-equal">not equal</option>
+        <option value="greater">greater</option>
+        <option value="greater-or-equal">greater or equal</option>
+        <option value="less">less</option>
+        <option value="less-or-equal">less or equal</option>
+        <option value="regex-match">regex match</option>
+      </select>
+    </div>
+    <ng-template [ngIf]="condition.condition === 'regex-match'">
+      <div class="input-group input-5">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">{{ condition.regexType }}
+          </button>
+          <div class=" dropdown-menu dropdown-menu-right" (click)="onNeedleChange(condition)">
+            <a class="dropdown-item" (click)="condition.regexType = 'regex'" href="#">regex</a>
+            <a class="dropdown-item" (click)="condition.regexType = 'startsWith'" href="#">startsWith</a>
+            <a class="dropdown-item" (click)="condition.regexType = 'endsWith'" href="#">endsWith</a>
+            <a class="dropdown-item" (click)="condition.regexType = 'contains'" href="#">contains</a>
+          </div>
+        </div>
+        <input type="text" class="form-control" placeholder="needle" [(ngModel)]="condition.needle"
+          (ngModelChange)="onNeedleChange(condition)" />
+      </div>
+      <div class="input-2">
+        <input type="text" [(ngModel)]="condition.pattern" placeholder="pattern" [disabled]="true" class="form-control">
+      </div>
+      <div class="input-3">
+        <input type="text" [(ngModel)]="condition.haystack" placeholder="haystack" class="form-control">
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="condition.condition !== 'regex-match'">
+      <div class="input-2">
+        <input type="text" class="form-control" placeholder="operand 1" [(ngModel)]="condition.operand1">
+      </div>
+      <div class="input-3">
+        <input type="text" class="form-control input-3" placeholder="operand 2" [(ngModel)]="condition.operand2">
+      </div>
+      <div class="dropdown input-4">
+        <button class="btn dropdown-toggle border-right-0 non-radius" type="button" data-toggle="dropdown">
+          {{ condition.compareAs === 'number' ? '123...' : 'ABCD...' }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" (click)="condition.compareAs = 'text'">Compare as text</a>
+          <a class="dropdown-item" href="#" (click)="condition.compareAs = 'number'">Compare as number</a>
+        </div>
+      </div>
+    </ng-template>
+    <div class="delete-btn text-right">
+      <button class="btn btn-danger" (click)="model.conditions.splice(i, 1)"><i class="fa fa-trash-o"></i></button>
+    </div>
+  </div>
+  <button class="btn primary mt-2" (click)="addCondition()"><i class="fa fa-plus"></i></button>
+</div>
+<div class="action-list pt-4">
+  <div class="section-title">Actions</div>
+  <div class="action" *ngFor="let action of model.actions; let i = index">
+    <div class="input-1">
+      <select class="custom-select" [(ngModel)]="action.action">
+        <option value="continue-to">Continue To</option>
+        <option value="assign">Assign</option>
+        <option value="capture">Capture</option>
+      </select>
+    </div>
+    <div class="input-2" *ngIf="action.action === 'continue-to'">
+      <select class="custom-select" [(ngModel)]="action.continueTo">
+        <option value=""></option>
+        <option value="Welcome">Welcome</option>
+      </select>
+    </div>
+    <ng-template [ngIf]="action.action === 'assign'">
+      <div class="input-group input-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="loop"><i class="fa fa-arrow-right"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="variable" [(ngModel)]="action.variable" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+            data-toggle="dropdown">{{ action.varType }}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" style="color: #ccc;" (click)="action.varType = 'scope'" href="#">Defualt</a>
+            <a class="dropdown-item" (click)="action.varType = 'module'" href="#">Module</a>
+            <a class="dropdown-item" (click)="action.varType = 'app'" href="#">Application</a>
+          </div>
+        </div>
+      </div>
+      <div class="input-4">
+        <input type="text" [(ngModel)]="action.varDescription" class="form-control">
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="action.action === 'capture'">
+      <div class="input-group input-5">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-arrow-right"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="variable" [(ngModel)]="action.variable" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">{{ action.varType }}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" style="color: #ccc;" (click)="action.varType = 'scope'" href="#">Defualt</a>
+            <a class="dropdown-item" (click)="action.varType = 'module'" href="#">Module</a>
+            <a class="dropdown-item" (click)="action.varType = 'app'" href="#">Application</a>
+          </div>
+        </div>
+      </div>
+      <div class="input-6">
+        <input type="text" [(ngModel)]="action.pattern" placeholder="pattern" class="form-control">
+      </div>
+      <div class="input-7">
+        <input type="text" [(ngModel)]="action.text" placeholder="text" class="form-control">
+      </div>
+    </ng-template>
+    <div class="delete-btn text-right">
+      <button class="btn btn-danger" (click)="model.actions.splice(i, 1)"><i class="fa fa-trash-o"></i></button>
+    </div>
+  </div>
+  <button class="btn primary mt-2" (click)="addAction()"><i class="fa fa-plus"></i></button>
+</div>

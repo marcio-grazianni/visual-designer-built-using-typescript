@@ -1,0 +1,27 @@
+@import "../../../utils.scss";
+
+.validation-error {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+.say-lookup-variable {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.lang-voice {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  .btn-group-toggle {
+    margin-left: 1rem;
+  }
+  @include media-breakpoint("xs") {
+    flex-direction: column;
+    .btn-group-toggle {
+      margin: 0.7rem 0 0;
+    }
+  }
+}
+
+

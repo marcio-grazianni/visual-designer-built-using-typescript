@@ -1,0 +1,281 @@
+<div class="dial-nouns-list">
+  <span class="dial-noun dial-noun-{{id}} badge badge-primary mr-2" data-type="phone"><i class="fa fa-phone mr-1"></i>Phone</span>
+  <span class="dial-noun dial-noun-{{id}} badge badge-primary mr-2" data-type="client"><i class="fa fa-user mr-1"></i>Client</span>
+  <span class="dial-noun dial-noun-{{id}} badge badge-primary mr-2" data-type="conference"><i
+      class="fa fa-group mr-1"></i>Conference</span>
+  <span class="dial-noun dial-noun-{{id}} badge badge-primary mr-2" data-type="sip-url">Sip URI</span>
+</div>
+<div class="dial-dropzone dial-dropzone-{{id}} pt-4 pb-4">
+  <div class="empty-dropzone empty-dropzone-{{id}}" *ngIf="model.nouns.length === 0"></div>
+  <div class="dial-noun-form" *ngFor="let noun of model.nouns; let i = index" [attr.data-id]="item.id" [id]="noun._id">
+    <ng-container [ngSwitch]="noun.type">
+      <ng-template [ngSwitchCase]="'phone'">
+        <ng-container *ngTemplateOutlet="dialPhone; context: {$implicit: noun, index: i} "></ng-container>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'client'">
+        <ng-container *ngTemplateOutlet="dialPhone; context: {$implicit: noun, index: i}"></ng-container>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'conference'">
+        <ng-container *ngTemplateOutlet="dialConf; context: {$implicit: noun, index: i}"></ng-container>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'sip-url'">
+        <ng-container *ngTemplateOutlet="dialURI; context: {$implicit: noun, index: i}"></ng-container>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+<div class="row-1" [class.connect-inputs]="setting1">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Continue to</span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.continueTo">
+      <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+    </select>
+    <div class="input-group-append" *ngIf="!setting1">
+      <button class="btn btn-secondary" type="button" (click)="setting1 = !setting1"><i class="fa fa-cog"></i></button>
+    </div>
+  </div>
+  <ng-template [ngIf]="setting1">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="max-part">Timeout</span>
+      </div>
+      <input type="number" [(ngModel)]="model.timeout" class="form-control" placeholder="30">
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="max-part">Time limit</span>
+      </div>
+      <input type="number" [(ngModel)]="model.timeLimit" class="form-control" placeholder="14400">
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="max-part">Caller ID</span>
+      </div>
+      <input type="number" [(ngModel)]="model.callerID" class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="button" (click)="setting1 = !setting1"><i
+            class="fa fa-cog"></i></button>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<div class="row-2">
+  <div class="input-group input-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="loop">Recording</span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.beforeConnect">
+      <option *ngFor="let option of ['', 'Yes', 'No']" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+  <div class="input-group xs-new-line xxs-new-line input-2">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="loop">
+        <span>Ring-back tone &nbsp;</span>
+        <span>
+          project &nbsp;
+          <input type="radio" [name]="'ringBackType' + id" value="project" [(ngModel)]="model.ringBackType">
+          &nbsp; URL &nbsp;
+          <input type="radio" [name]="'ringBackType' + id" value="URL" [(ngModel)]="model.ringBackType">
+        </span>
+      </span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.ringBack" *ngIf="model.ringBackType === 'project'">
+      <option *ngFor="let option of ['']" [value]="option">{{ option }}</option>
+    </select>
+    <input *ngIf="model.ringBackType === 'URL'" type="text" name="loop" class="form-control" placeholder="http://..."
+      [(ngModel)]="model.ringBack">
+  </div>
+</div>
+<ng-template #dialPhone let-noun let-index="index">
+  <div class="dial-phone">
+    <div class="row-3" [class.connect-inputs]="noun.setting">
+      <div class="input-group">
+        <div class="input-group-prepend handle">
+          <span class="input-group-text"><i class="fa fa-{{noun.type === 'client' ? 'user' : 'phone' }}"></i></span>
+        </div>
+        <input type="text" name="loop" class="form-control" [(ngModel)]="noun.destination"
+          placeholder="{{ noun.type === 'phone' ? '1-444-555-6666' : 'thoms'}}" #destination="ngModel">
+        <div class="input-group-append">
+          <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="localVarDropdown"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#" (click)="noun.destination =  (noun.destination || '') + '$' + lockupVar"
+              *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+          </div>
+          <ng-template [ngIf]="!noun.setting">
+            <button class="btn btn-secondary" type="button" (click)="noun.setting = !noun.setting"><i
+                class="fa fa-cog"></i></button>
+            <button class="btn btn-secondary" type="button" (click)="remove(index)"><i class="fa fa-times"></i></button>
+          </ng-template>
+        </div>
+      </div>
+      <div class="input-group xs-new-line" *ngIf="noun.setting">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="before-connect">Before connect</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="noun.beforeConnect">
+          <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="button" (click)="noun.setting = !noun.setting"><i
+              class="fa fa-cog"></i></button>
+          <button class="btn btn-secondary" type="button" (click)="remove(index)"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="input-group xs-new-line ml-4 mt-2 w-auto" *ngIf="noun.setting">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Status callback</span>
+      </div>
+      <input *ngIf="noun.statusCallbackType === 'URL'" type="text" class="form-control" placeholder="http://..."
+        [(ngModel)]="noun.statusCallback">
+      <select *ngIf="noun.statusCallbackType === 'module'" class="custom-select" [(ngModel)]="noun.statusCallback">
+        <option *ngFor="let option of ['--no module select --', 'Welcome']" [value]="option">{{ option }}</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+          data-toggle="dropdown">{{ noun.statusCallbackType }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="noun.statusCallbackType = 'module'" href="#">Module</a>
+          <a class="dropdown-item" (click)="noun.statusCallbackType = 'URL'" href="#">URL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #dialConf let-noun let-index="index">
+  <div class="dial-phone">
+    <div class="input-group">
+      <div class="input-group-prepend handle">
+        <span class="input-group-text"><i class="fa fa-group"></i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="My Conference Room" [(ngModel)]="noun.destination">
+      <div class="input-group-append">
+        <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" data-toggle="dropdown">
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#" (click)="noun.destination =  (noun.destination || '') + '$' + lockupVar"
+            *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+        </div>
+        <button class="btn btn-secondary" type="button" (click)="noun.setting = !noun.setting"><i
+            class="fa fa-cog"></i></button>
+        <button class="btn btn-secondary" type="button" (click)="remove(index)"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <ng-template [ngIf]="noun.setting">
+      <div class="row-3 ml-4 mt-2 connect-inputs">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Muted</label>
+          </div>
+          <select class="custom-select" [(ngModel)]="noun.muted">
+            <option value=""></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Beep</label>
+          </div>
+          <select class="custom-select" [(ngModel)]="noun.beep">
+            <option value=""></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Start over</label>
+          </div>
+          <select class="custom-select" [(ngModel)]="noun.startOver">
+            <option value=""></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text">End on exit</label>
+          </div>
+          <select class="custom-select" [(ngModel)]="noun.endOnExit">
+            <option value=""></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Max participants</span>
+          </div>
+          <input type="number" class="form-control" placeholder="3" [(ngModel)]="noun.maxParticipants">
+        </div>
+      </div>
+      <div class="input-group xs-new-line mt-2 ml-4 w-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="loop">While waiting</span>
+          <button class="btn btn-secondary rounded-0" type="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">{{ noun.whileWaitingType }}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" (click)="noun.whileWaitingType = 'module'" href="#">Module</a>
+            <a class="dropdown-item" (click)="noun.whileWaitingType = 'URL'" href="#">URL</a>
+          </div>
+        </div>
+        <input *ngIf="noun.whileWaitingType === 'URL'" [(ngModel)]="noun.whileWaiting" type="text" class="form-control"
+          placeholder="http://...">
+        <select *ngIf="noun.whileWaitingType === 'module'" [(ngModel)]="noun.whileWaiting" class="custom-select">
+          <option value=""></option>
+          <option value="Welcome">Welcome</option>
+        </select>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>
+<ng-template #dialURI let-noun let-index="index">
+  <div class="dial-phone">
+    <div class="d-flex">
+      <div class="input-group xs-new-line">
+        <div class="input-group-prepend handle">
+          <span class="input-group-text" id="loop">Sip URl</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="noun.destination" placeholder="sip:thomas@127.0.0.1:5080">
+        <div class="input-group-append">
+          <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" data-toggle="dropdown">
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#" (click)="noun.destination =  (noun.destination || '') + '$' + lockupVar"
+              *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+          </div>
+          <button class="btn btn-secondary" type="button" (click)="noun.setting = !noun.setting"><i
+              class="fa fa-cog"></i></button>
+          <button class="btn btn-secondary" type="button" (click)="remove(index)"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="input-group xs-new-line ml-4 mt-2 w-auto" *ngIf="noun.setting">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="loop">Status callback</span>
+      </div>
+      <input *ngIf="noun.statusCallbackType === 'URL'" type="text" class="form-control" placeholder="http://..."
+        [(ngModel)]="noun.statusCallback">
+      <select *ngIf="noun.statusCallbackType === 'module'" class="custom-select" [(ngModel)]="noun.statusCallback">
+        <option *ngFor="let option of ['--no module select --', 'Welcome']" [value]="option">{{ option }}</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+          data-toggle="dropdown">{{ noun.statusCallbackType }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="noun.statusCallbackType = 'module'" href="#">Module</a>
+          <a class="dropdown-item" (click)="noun.statusCallbackType = 'URL'" href="#">URL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

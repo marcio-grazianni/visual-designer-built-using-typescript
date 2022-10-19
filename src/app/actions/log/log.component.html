@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label for="text">Text</label>
+  <textarea class="form-control" rows="3" name="text" [(ngModel)]="model.text"></textarea>
+</div>
+<div class="say-lookup-variable text-right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+      Lookup Variable
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="#" *ngFor="let lockupVar of lockupVarsList"
+        (click)="addLookupVar(lockupVar)">{{ lockupVar }}</a>
+    </div>
+  </div>
+</div>

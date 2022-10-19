@@ -1,0 +1,62 @@
+<div class="form-group">
+  <label for="text">Text</label>
+  <textarea class="form-control" id="text" rows="3" [(ngModel)]="model.text"></textarea>
+</div>
+<div class="say-lookup-variable text-right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+      Lookup Variable
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="#" *ngFor="let lockupVar of lockupVarsList"
+        (click)="addLookupVar(lockupVar)">{{ lockupVar }}</a>
+    </div>
+  </div>
+</div>
+<div class="row-1">
+  <div class="input-group input-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text">To</span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="model.to">
+    <div class="input-group-append">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="#" (click)="model.to =  (model.to || '') + '$' + lockupVar"
+          *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="input-group input-2">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="loop">Continue to</span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.continueTo">
+      <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+</div>
+<div class="row-1">
+  <div class="input-group input-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="loop">From</span>
+    </div>
+    <input type="text" name="loop" class="form-control" [(ngModel)]="model.from">
+    <div class="input-group-append">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="localVarDropdown"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="localVarDropdown">
+        <a class="dropdown-item" href="#" (click)="model.from =  (model.from || '') + '$' + lockupVar"
+          *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="input-group input-2">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="loop">Status callback</span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="model.statusCallback" />
+  </div>
+</div>

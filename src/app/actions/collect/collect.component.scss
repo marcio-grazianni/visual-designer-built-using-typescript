@@ -1,0 +1,113 @@
+@import "../../../utils.scss";
+
+.collect-top {
+  display: flex;
+  @include media-breakpoint("lt-md") {
+    flex-direction: column;
+    .collect-top__left {
+      margin-right: 0;
+    }
+  }
+  .collect-top__left {
+    min-height: 200px;
+    margin-right: 1rem;
+  }
+  .collect-top__left,
+  .collect-top__right {
+    flex: 50%;
+  }
+  .digit-mapping {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+    @include media-breakpoint("xs") {
+      flex-direction: column;
+      .digit-mapping__digit, .digit-mapping__target {
+        margin-bottom: 0.7rem;
+      }
+      .digit-mapping__remove {
+        text-align: right;
+      }
+    }
+    .digit-mapping__digit {
+      flex: 45%;
+      margin-right: 1rem;
+    }
+    .digit-mapping__target {
+      flex: 35%;
+      margin-right: 1rem;
+    }
+    .digit-mapping__remove {
+      flex: 5%;
+    }
+  }
+  .collect-digits {
+    margin-top: 1rem;
+    .collect-digits__assign-to {
+      display: flex;
+      margin-bottom: 0.7rem;
+      @include media-breakpoint("xs") {
+        flex-direction: column;
+      }
+    }
+  }
+}
+.dtmf__options {
+  display: flex;
+  margin-top: 1rem;
+  .input-group {
+    margin-right: 0.7rem;
+  }
+@include media-breakpoint("lt-md") {
+    flex-direction: column;
+    .input-group {
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+    }
+  }
+}
+.speech__options {
+  margin-top: 1rem;
+  .row-3 {
+    display: flex;
+    margin-top: 1rem;
+    .input-group {
+      margin-right: 0.7rem;
+      max-width: 40%;
+    }
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+      .input-group {
+        margin-bottom: 0.7rem;
+        margin-right: 0;
+      max-width: 100%;
+      }
+    }
+  }
+  .row-4 {
+    display: flex;
+    margin-top: 1rem;
+    align-items: flex-start;
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+    }
+    .input-2 {
+      flex: 25%;
+    }
+  }
+}
+.collect-lang {
+  margin: 1rem 0;
+  display: flex;
+  align-items: flex-start;
+  .btn-group-toggle {
+    margin-left: 1rem;
+  }
+  @include media-breakpoint("xs") {
+    flex-direction: column;
+    .btn-group-toggle {
+      margin-top: 0.7rem;
+      margin-left: 0rem;
+    }
+  }
+}

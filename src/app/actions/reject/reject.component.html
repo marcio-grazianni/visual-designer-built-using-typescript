@@ -1,0 +1,8 @@
+<div class="input-group mb-3 w-auto">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Reason</span>
+  </div>
+  <select class="custom-select" [(ngModel)]="model.reason">
+    <option *ngFor="let option of ['', 'busy', 'rejected']" [value]="option">{{ option }}</option>
+  </select>
+</div>

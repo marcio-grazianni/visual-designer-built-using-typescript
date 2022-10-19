@@ -1,0 +1,31 @@
+<div class="redirect connect-inputs">
+  <div class="input-group xs-new-line input-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Continue to</span>
+    </div>
+    <input *ngIf="model.continueToType === 'URL'" type="text" class="form-control" placeholder="http://..."
+      [(ngModel)]="model.continueTo">
+    <select *ngIf="model.continueToType === 'module'" class="custom-select" [(ngModel)]="model.continueTo">
+      <option *ngFor="let option of ['--no module select --', 'Welcome']" [value]="option">{{ option }}</option>
+    </select>
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+        data-toggle="dropdown">{{ model.continueToType }}
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" (click)="model.continueToType = 'module'; model.continueTo = null" href="#">Module</a>
+        <a class="dropdown-item" (click)="model.continueToType = 'URL'; model.continueTo = null" href="#">URL</a>
+      </div>
+    </div>
+  </div>
+  <div class="input-group input-2">
+    <div class="input-group-prepend">
+      <label class="input-group-text">method</label>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.method">
+      <option value=""></option>
+      <option value="POST">POST</option>
+      <option value="GET">GET</option>
+    </select>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+@import "../../../utils.scss";
+
+.row-1 {
+  display: flex;
+  margin: 1rem 0;
+  & > * {
+    margin-right: 0.7rem;
+  }
+  @include media-breakpoint("xs") {
+    flex-direction: column;
+    & > * {
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+    }
+  }
+}

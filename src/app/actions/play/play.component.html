@@ -1,0 +1,43 @@
+<div class="form-group">
+  <label for="text">Type the URL resource of the media file</label>
+  <div class="input-group xs-new-line xxs-new-line mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="loop">
+        <span>Media resource &nbsp;</span>
+        <span>
+          project &nbsp;
+          <input type="radio" [name]="'mediaResourceType' + id" value="project" [(ngModel)]="model.mediaResourceType">
+          URL &nbsp;
+          <input type="radio" [name]="'mediaResourceType' + id" value="URL" [(ngModel)]="model.mediaResourceType">
+        </span>
+      </span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.mediaResource" *ngIf="model.mediaResourceType === 'project'">
+      <option *ngFor="let option of ['']" (click)="model.mediaResource = null" [value]="option">{{ option }}</option>
+    </select>
+    <ng-template [ngIf]="model.mediaResourceType === 'URL'">
+      <input type="text" class="form-control" [(ngModel)]="model.mediaResource">
+      <div class="input-group-append">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="localVarDropdown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="localVarDropdown">
+          <a class="dropdown-item" href="#" (click)="model.mediaResource =  url"
+            *ngFor="let url of urlList">{{ url }}</a>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<i class="fa fa-cog setting-toogle" [class.active]="settingActive" (click)="settingActive = !settingActive"
+  href="#saySettings"></i>
+<div class="mt-4" [style.display]="settingActive ? '' : 'none'">
+  <div class="loop d-flex">
+    <div class="input-group mb-3 w-auto">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="loop">Repeat # times</span>
+      </div>
+      <input type="number" [(ngModel)]="model.loop" class="form-control" placeholder="1">
+    </div>
+  </div>
+</div>

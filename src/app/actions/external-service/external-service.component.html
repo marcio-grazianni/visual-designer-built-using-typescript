@@ -1,0 +1,299 @@
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Service Url</span>
+  </div>
+  <input type="text" name="loop" class="form-control" placeholder="http://..." [(ngModel)]="model.serviceUrl">
+</div>
+<div class="mt-3" *ngIf="model.params.length > 0">
+  <div class="section-title">Parameters</div>
+  <div class="parameters" *ngFor="let param of model.params; let i = index">
+    <div class="input-group input-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Name</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="param.name">
+    </div>
+    <div class="input-group input-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Value</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="param.value">
+      <div class="input-group-append">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" (click)="param.value =  (param.value || '') + '$' + lockupVar"
+            *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="remove-btn">
+      <button class="btn btn-danger" type="button" (click)="model.params.splice(i, 1)"><i
+          class="fa fa-trash-o"></i></button>
+    </div>
+  </div>
+</div>
+<div class="mt-3" *ngIf="model.headers.length > 0">
+  <h5 class="font-weight-normal">Headers</h5>
+  <div class="headers" *ngFor="let header of model.headers; let i = index">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Name</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="header.name">
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Value</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="header.value">
+      <div class="input-group-append">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" (click)="header.value =  (header.value || '') + '$' + lockupVar"
+            *ngFor="let lockupVar of lockupVarsList">{{ lockupVar }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="remove-btn">
+      <button class="btn btn-danger" type="button" (click)="model.headers.splice(i, 1)"><i
+          class="fa fa-trash-o"></i></button>
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-secondary add-more-btn btn-sm" (click)="model.params.push({})">Add service
+  parameter</button>
+<button type="button" class="btn btn-secondary add-more-btn btn-sm ml-2 add-header" (click)="model.headers.push({})">Add http
+  header</button>
+<div class="settings">
+  <i class="fa fa-cog setting-toogle" [class.active]="settingActive" (click)="settingActive = !settingActive"
+    href="#saySettings"></i>
+  <div class="settings-content" [style.display]="settingActive ? '' : 'none'">
+    <div class="row-1 connect-inputs">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Method</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="model.method">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="GET">GET</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Content-Type</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="model.contentType"
+          [disabled]="model.method !== 'POST' && model.method !== 'PUT'">
+          <option value=""></option>
+          <option value="www-form">www form</option>
+          <option value="json">json</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Username</label>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="model.username">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Password</label>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="model.password">
+      </div>
+    </div>
+    <textarea *ngIf="model.method === 'POST' || model.method === 'PUT'" class="form-control" id="text" rows="2"
+      placeholder="type POST/PUT content here" [(ngModel)]="model.body"></textarea>
+  </div>
+</div>
+<div class="assignment">
+  <div class="section-title">Assign response to variables</div>
+  <button type="button" class="btn btn-secondary btn-sm mt-3 mb-3 add-more-btn"
+    (click)="model.reponseVars.push({ type: 'object' })">Add
+    assignment</button>
+  <div class="variable-list" *ngFor="let variable of model.reponseVars; let i = index">
+    <div class="row-1">
+      <div class="row-2 connect-inputs">
+        <div class="input-group input-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Assign to</span>
+          </div>
+          <input type="number" [(ngModel)]="variable.assignTo" class="form-control" placeholder="type variable name">
+        </div>
+        <div class="input-group input-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scope</span>
+          </div>
+          <select class="custom-select" [(ngModel)]="variable.scope">
+            <option *ngFor="let option of ['module', 'application']" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row-3">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Module scope</span>
+          </div>
+          <select class="custom-select" [(ngModel)]="variable.moduleScope" [disabled]="!model.continueTo">
+            <option *ngFor="let option of ['--All--', 'Welcome']" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="assignment-template">
+      <ng-container *ngTemplateOutlet="assignVarTemp; context: { $implicit: variable }"></ng-container>
+    </div>
+    <div class="assignment__remove">
+      <i class="fa fa-times remove-mapping" (click)="model.reponseVars.splice(i, 1)"></i>
+    </div>
+  </div>
+</div>
+<div class="routing">
+  <div class="section-title">Make a routing decision</div>
+  <div class="routing__continue">
+    <div class="routing__continue-col-1">
+      <div class="input-group xs-new-line xxs-new-line">
+        <div class="input-group-prepend w-100">
+          <label class="input-group-text w-100">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" [id]="'continue' + 'id'" [(ngModel)]="model.continueTo">
+              <label class="form-check-label" [for]="'continue' + 'id'">
+                Continue To
+              </label>
+            </div>
+            <ng-template [ngIf]="model.continueTo">
+              <div class="form-check form-check-inline">
+                <label class="form-check-label" [for]="'fixed' + id">fixed</label>
+                <input class="form-check-input ml-2" [name]="'continueToType' + id" [(ngModel)]="model.continueToType" type="radio" [id]="'fixed' + id"
+                  value="fixed" checked>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label" [for]="'mapped' + id">mapped</label>
+                <input class="form-check-input ml-2" [name]="'continueToType' + id" [(ngModel)]="model.continueToType" type="radio"
+                  [id]="'mapped' + id" value="mapped">
+              </div>
+            </ng-template>
+          </label>
+        </div>
+      </div>
+    </div>
+    <ng-template [ngIf]="model.continueTo">
+      <div class="routing__continue-col-2">
+        <select class="custom-select" [(ngModel)]="model.targetModule" *ngIf="model.continueToType === 'fixed'">
+          <option *ngFor="let option of ['--All--', 'Welcome']" [value]="option">{{ option }}</option>
+        </select>
+        <div class="assignment-template" *ngIf="model.continueToType === 'mapped'">
+          <ng-container *ngTemplateOutlet="assignVarTemp; context: { $implicit: model.mapped }"></ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <ng-template [ngIf]="model.continueToType === 'mapped'">
+    <div class="mb-3">
+      <button type="button" class="btn btn-secondary btn-sm add-more-btn" (click)="model.mapping.push({})">Add
+        mapping</button>
+    </div>
+    <div class="mapping" *ngFor="let mapping of model.mapping; let i = index">
+      <div class="connect-inputs">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="mapping.name">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Value</span>
+          </div>
+          <select class="custom-select" [(ngModel)]="mapping.continueTo">
+            <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="remove-btn">
+        <i class="fa fa-times remove-mapping mt-2 ml-2" (click)="model.mapping.splice(i, 1)"></i>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<div class="error-timeout">
+  <div class="section-title">Errors & Timeouts</div>
+  <div class="error-timeout__inputs">
+    <div class="input-group input-1 align-items-start">
+      <div class="input-group-prepend">
+        <label class="input-group-text">On HTTP Error</label>
+      </div>
+      <select class="custom-select" [(ngModel)]="model.onHttpError">
+        <option value=""></option>
+        <option value="Welcome">Welcome</option>
+      </select>
+    </div>
+    <div class="row-1 connect-inputs">
+      <div class="input-group align-items-start">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Timeout</label>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="model.timeout" placeholder="5000">
+      </div>
+      <div class="input-group xs-new-line">
+        <div class="input-group-prepend">
+          <label class="input-group-text text-overflow">Connection errors and Timeouts</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="model.connectionErr">
+          <option value=""></option>
+          <option value="Welcome">Welcome</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #assignVarTemp let-variable>
+  <div class="inputs connect-inputs">
+    <div class="input-group input-1">
+      <div class="input-group-prepend" [class.w-100]="variable.done">
+        <span class="input-group-text d-flex justify-content-center"
+          [class.w-100]="variable.done">{{ showOperation(variable.operation) }}</span>
+      </div>
+      <select class="custom-select" *ngIf="!variable.done" [(ngModel)]="variable.type"
+        (ngModelChange)="variable.type === 'value' && addOpeartion(variable)">
+        <option *ngFor="let option of ['object', 'array', 'value']" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+    <ng-template [ngIf]="!variable.done">
+      <div class="input-group input-2" *ngIf="variable.type === 'object'">
+        <div class="input-group-prepend">
+          <span class="input-group-text"></span>
+        </div>
+        <select class="custom-select" [(ngModel)]="variable.scope">
+          <option *ngFor="let option of ['', 'propertyNamed']" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+      <div class="input-group input-2" *ngIf="variable.type === 'array'">
+        <div class="input-group-prepend">
+          <span class="input-group-text"></span>
+        </div>
+        <select class="custom-select" [(ngModel)]="variable.scope">
+          <option *ngFor="let option of ['', 'itemAtPosition']" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+      <div class="input-group input-3" *ngIf="variable.scope">
+        <div class="input-group-prepend">
+          <span class="input-group-text"></span>
+        </div>
+        <input class="form-control" [(ngModel)]="variable.value" [type]="variable.type === 'object' ? 'text' : 'number'"
+          value="fixed">
+      </div>
+    </ng-template>
+  </div>
+  <div class="btns">
+    <button type="button" class="btn btn-secondary add-more-btn btn-sm mr-2" *ngIf="variable.operation?.length > 0"
+      (click)="removeOpeartion(variable)"><i class="fa fa-undo"></i></button>
+    <button type="button" class="btn btn-secondary add-more-btn btn-sm" *ngIf="!variable.done"
+      [disabled]="!variable.value && variable.type !== 'value'"
+      (click)="addOpeartion(variable)">{{ variable.type === 'value' ? 'Done' : 'Add operation'}}</button>
+  </div>
+</ng-template>

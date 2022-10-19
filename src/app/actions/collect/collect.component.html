@@ -1,0 +1,216 @@
+<div style="position: fixed; top: 0; right: 0; width: 100vw;" *ngIf="showMsg" class="alert alert-warning text-center"
+  role="alert">
+  <i class="fa fa-warning"></i> Only 'Say' and 'Play' can be dropped in Collect!
+</div>
+<div class="collect-top">
+  <div class="collect-top__left">
+    <div class="section-title">Prompt</div>
+    <p>Drag say comands below to prompt the user to type some digits</p>
+    <div class="vd-tab-conent sortable collect-sortable sortable-{{id}} collect-sortable-{{id}}">
+      <div *ngFor="let item of rightItems; let i = index" [attr.data-id]="item.id" [id]="item._id">
+        <div class="vd-collasable">
+          <div class="vd-collasable__title">
+            <span class="d-flex flex-grow-1">
+              <i class="fa fa-sort-desc pr-2" [ngStyle]="{'transform': item.collapsed ? 'rotate(-90deg)' : '' }"
+                style="cursor: pointer; transition: all 200ms ease-out;" (click)="item.collapsed = !item.collapsed"></i>
+              <span class="flex-grow-1 handle">{{ item.text }}</span>
+            </span>
+            <i class="fa fa-trash-o" style="cursor: pointer;" (click)="removePanel(i)"></i>
+          </div>
+          <div class="vd-collasable__content" [style.display]="item.collapsed ? 'none' : ''">
+            <ng-container [ngSwitch]="item.id">
+              <ng-template [ngSwitchCase]="'Say'">
+                <app-say [item]="item"></app-say>
+              </ng-template>
+              <ng-template [ngSwitchCase]="'Play'">
+                <app-play [item]="item"></app-play>
+              </ng-template>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collect-top__right">
+    <div class="section-title">Create a menu or collect digits</div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" [name]="'type' + id" [(ngModel)]="model.type" [id]="'menu' + id" value="menu">
+      <label class="form-check-label" [for]="'menu' + id">Menu</label>
+    </div>
+    <div class="ml-2 form-check form-check-inline">
+      <input class="form-check-input" type="radio" [name]="'type' + id" [(ngModel)]="model.type" [id]="'collect-digits' + id"
+        value="collect-digits">
+      <label class="form-check-label" [for]="'collect-digits' + id">Collect digits</label>
+    </div>
+    <div class="collect-digits" *ngIf="model.type === 'collect-digits'">
+      <label for="text">Digits variable</label>
+      <div class="collect-digits__assign-to connect-inputs">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="loop">Assign to</span>
+          </div>
+          <input type="number" [(ngModel)]="model.assignTo" class="form-control" placeholder="30">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="max-part">Scope</span>
+          </div>
+          <select class="custom-select" [(ngModel)]="model.scope">
+            <option *ngFor="let option of ['module', 'application']" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="loop">Continue to</span>
+        </div>
+        <select class="custom-select" [(ngModel)]="model.continueTo">
+          <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+    </div>
+    <ng-template [ngIf]="model.type === 'menu'">
+      <p class="mt-2">Digits mapping</p>
+      <div class="digit-mapping" *ngFor="let mapping of model.mappings; let i = index">
+        <div class="input-group input-group-sm digit-mapping__digit">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Digit</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="mapping.digit" placeholder="123">
+        </div>
+        <div class="input-group input-group-sm digit-mapping__target">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Target</span>
+          </div>
+          <select class="custom-select" [(ngModel)]="mapping.target">
+            <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="digit-mapping__remove">
+          <i class="fa fa-times remove-mapping" (click)="model.mappings.splice(i, 1)"></i>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm add-more-btn" (click)="model.mappings.push({})">Add
+        mapping</button>
+    </ng-template>
+    <h5 class="font-weight-normal mt-3">Validation</h5>
+    <div class="input-group xs-new-line mb-3 w-auto" *ngIf="model.type === 'collect-digits'">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="loop">Validation pattern</span>
+      </div>
+      <input type="text" [(ngModel)]="model.prttern" class="form-control">
+      <div class="input-group-append">
+        <button class="btn dropdown-toggle btn-outline-secondary" type="button"
+          data-toggle="dropdown">{{ model.prtternType === 'one-of' ? 'One Of' : 'Regex' }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="model.prtternType = 'one-of'" href="#">One of</a>
+          <a class="dropdown-item" (click)="model.prtternType = 'regex'" href="#">Regex</a>
+        </div>
+      </div>
+    </div>
+    <p>Say if invalid</p>
+    <textarea class="form-control" id="text" rows="2" [(ngModel)]="model.text"
+      placeholder="You typed a wrong option. Please try again"></textarea>
+    <div class="collect-lang">
+      <div class="input-group w-auto">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="language">Language</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="model.language">
+          <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+        </select>
+      </div>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary" [class.active]="model.voice === 'man'" (click)="model.voice = 'man'">
+          <input type="radio" [name]="'voice' + id" [(ngModel)]="model.voice" value="man"> <i
+            class="fa fa-male"></i>
+        </label>
+        <label class="btn btn-secondary" [class.active]="model.voice === 'woman'" (click)="model.voice = 'woman'">
+          <input type="radio" [name]="'voice' + id" [(ngModel)]="model.voice" value="wonman"> <i class="fa fa-male"></i>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collect-bottom">
+  <i class="fa fa-cog setting-toogle" [class.active]="settingActive" (click)="settingActive = !settingActive"
+    href="#saySettings"></i>
+  <div class="mt-4" [style.display]="settingActive ? '' : 'none'">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" [name]="'inputType' + id" [(ngModel)]="model.inputType" [id]="'dtmf' + id"
+        value="dtmf">
+      <label class="form-check-label" [for]="'dtmf' + id">DTMF</label>
+    </div>
+    <div class="ml-2 form-check form-check-inline">
+      <input class="form-check-input" type="radio" [name]="'inputType' + id" [(ngModel)]="model.inputType" [id]="'speech' + id"
+        value="speech">
+      <label class="form-check-label" [for]="'speech' + id">Speech</label>
+    </div>
+    <div class="dtmf__options" *ngIf="model.inputType === 'dtmf'">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="muted">Finish on key</label>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="model.dtmfFinishOnKey" placeholder="#'123...'">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="muted">Number of digits</label>
+        </div>
+        <input type="number" class="form-control" [(ngModel)]="model.noOfDigits" placeholder="123">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="muted">Timeout</label>
+        </div>
+        <input type="number" class="form-control" [(ngModel)]="model.dtmfTimeout" placeholder="5">
+      </div>
+    </div>
+    <div class="speech__options" *ngIf="model.inputType === 'speech'">
+      <div class="input-group mb-3 w-auto">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="language">Language</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="model.speachLanguage">
+          <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+        </select>
+      </div>
+      <h5 class="font-weight-normal">Hot words</h5>
+      <textarea class="form-control" id="text" rows="2" [(ngModel)]="model.hotwords"
+        placeholder="User , as separator between Hot words"></textarea>
+      <div class="row-3">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="muted">Finish on key</label>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="model.speechFinishOnKey" placeholder="#'123...'">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="muted">Timeout</label>
+          </div>
+          <input type="number" class="form-control" [(ngModel)]="model.speechTimeout" placeholder="5">
+        </div>
+      </div>
+      <div class="row-4 connect-inputs">
+        <div class="input-group input-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="loop">Partial Result URL</span>
+          </div>
+          <input type="text" class="form-control" placeholder="http://..." [(ngModel)]="model.partialResultURL">
+        </div>
+        <div class="input-group input-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text">method</label>
+          </div>
+          <select class="custom-select" [(ngModel)]="model.method">
+            <option value=""></option>
+            <option value="POST">POST</option>
+            <option value="GET">GET</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

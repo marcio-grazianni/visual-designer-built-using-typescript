@@ -1,0 +1,15 @@
+@import "../../../utils.scss";
+
+.redirect {
+  display: flex;
+  margin-bottom: 0.7rem;
+  @include media-breakpoint("lt-md") {
+    flex-direction: column;
+  }
+  .input-1 {
+    flex: 70%;
+  }
+  .input-2 {
+    flex: 30%;
+  }
+}

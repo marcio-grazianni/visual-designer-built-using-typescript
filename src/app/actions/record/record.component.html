@@ -1,0 +1,47 @@
+<div class="row-1">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Continue to</span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.continueTo">
+      <option *ngFor="let option of ['', 'Welcome']" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="beep">Beep</label>
+    </div>
+    <select class="custom-select" id="beep" [(ngModel)]="model.beep">
+      <option value=""></option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+</div>
+<i class="fa fa-cog setting-toogle" [class.active]="settingActive" (click)="settingActive = !settingActive"
+  href="#saySettings"></i>
+<div class="row-2" [style.display]="settingActive ? '' : 'none'">
+  <div class="input-group input">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Timeout</span>
+    </div>
+    <input type="number" [(ngModel)]="model.timeout" class="form-control" placeholder="1">
+  </div>
+  <div class="input-group input">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Max length</span>
+    </div>
+    <input type="number" [(ngModel)]="model.maxLength" class="form-control" placeholder="1">
+  </div>
+  <div class="input-group input">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Finish on</span>
+    </div>
+    <select class="custom-select" [(ngModel)]="model.finishOn">
+      <option value="custom">Type some keys...</option>
+      <option value="any">Any key</option>
+      <option value="disabled">DISABLED</option>
+    </select>
+  </div>
+  <input *ngIf="model.finishOn === 'custom'" type="text" [(ngModel)]="model.customKey" class="form-control input" placeholder="#*123...">
+</div>

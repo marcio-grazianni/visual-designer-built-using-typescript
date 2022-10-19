@@ -1,0 +1,186 @@
+@import "../../../utils.scss";
+
+.parameters,
+.headers {
+  display: flex;
+  margin: 0.7rem 0;
+  width: 60%;
+  & > * {
+    margin-right: 0.7rem;
+  }
+  @include media-breakpoint("lt-md") {
+    width: 100%;
+    flex-direction: column;
+    & > * {
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+    }
+    .remove-btn {
+      text-align: right;
+    }
+  }
+  .input-1 {
+    flex: 20%;
+  }
+  .input-2 {
+    flex: 30%;
+  }
+}
+.settings {
+  margin-top: 1rem;
+  .settings-content {
+    margin-top: 1rem;
+    .row-1 {
+      display: flex;
+      margin-bottom: 0.7rem;
+      @include media-breakpoint("lt-md") {
+        flex-direction: column;
+      }
+    }
+  }
+}
+.assignment {
+  margin-top: 1rem;
+  .variable-list {
+    display: flex;
+    margin-bottom: 0.7rem;
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+    }
+    .assignment-template {
+      flex: 55%;
+    }
+    .row-1 {
+      flex: 40%;
+    }
+    .assignment__remove {
+      flex: 2%;
+      text-align: right;
+    }
+  }
+  .row-1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.7rem;
+    @include media-breakpoint("lt-md") {
+      margin-right: 0;
+    }
+    .row-3 {
+      margin: 0.5rem 0;
+    }
+  }
+  .row-2 {
+    display: flex;
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+    }
+    .input-1 {
+      flex: 70%;
+    }
+    .input-2 {
+      flex: 30%;
+    }
+  }
+}
+.assignment-template {
+  .inputs {
+    display: flex;
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+    }
+    .input-1 {
+      flex: 30%;
+    }
+    .input-2 {
+      flex: 30%;
+    }
+    .input-3 {
+      flex: 50%;
+    }
+  }
+  .btns {
+    display: flex;
+    align-items: center;
+    margin-top: 0.7rem;
+    justify-content: flex-end;
+  }
+}
+.routing {
+  margin-top: 0.7rem;
+  .routing__continue {
+    margin-top: 0.7rem;
+    display: flex;
+    & > * {
+      margin-right: 0.7rem;
+    }
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+      & > * {
+        margin-bottom: 0.7rem;
+        margin-right: 0;
+      }
+    }
+    .routing__continue-col-1 {
+      flex: 40%;
+      max-width: 40%;
+      @include media-breakpoint("lt-md") {
+        max-width: 100%;
+      }
+    }
+    .routing__continue-col-2 {
+      flex: 60%;
+    }
+  }
+  .mapping {
+    display: flex;
+    margin-bottom: 0.7rem;
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+      .remove-btn {
+        text-align: right;
+      }
+    }
+    .connect-inputs {
+      display: flex;
+      max-width: 50%;
+      @include media-breakpoint("lt-md") {
+        flex-direction: column;
+        max-width: 100%;
+      }
+    }
+  }
+}
+.error-timeout {
+  margin-top: 1rem;
+  .error-timeout__inputs {
+    margin-top: 0.7rem;
+    display: flex;
+    & > * {
+      margin-right: 0.7rem;
+    }
+    @include media-breakpoint("lt-md") {
+      width: 100%;
+      flex-direction: column;
+      & > * {
+        margin-bottom: 0.7rem;
+        margin-right: 0;
+      }
+    }
+    .input-1 {
+      flex: 30%;
+    }
+  }
+  .row-1 {
+    display: flex;
+    flex: 60%;
+    @include media-breakpoint("lt-md") {
+      flex-direction: column;
+    }
+  }
+}
+
+@include media-breakpoint("xxs") {
+  .add-header {
+    margin-left: 0 !important;
+  }
+}
