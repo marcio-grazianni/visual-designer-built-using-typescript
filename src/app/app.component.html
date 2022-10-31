@@ -34,51 +34,7 @@
               <i class="fa fa-trash-o" style="cursor: pointer;" (click)="removePanel(i)"></i>
             </div>
             <div class="vd-collasable__content" [style.display]="item.collapsed ? 'none' : ''">
-              <ng-container [ngSwitch]="item.id">
-                <ng-template [ngSwitchCase]="'Say'">
-                  <app-say [item]="item"></app-say>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Play'">
-                  <app-play [item]="item"></app-play>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Dial'">
-                  <app-dail [item]="item"></app-dail>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Control'">
-                  <app-control [item]="item"></app-control>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Log'">
-                  <app-log [item]="item"></app-log>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Reject'">
-                  <app-reject [item]="item"></app-reject>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Pause'">
-                  <app-pause [item]="item"></app-pause>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Redirect'">
-                  <app-redirect [item]="item"></app-redirect>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'SMS'">
-                  <app-sms [item]="item"></app-sms>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Email'">
-                  <app-email [item]="item"></app-email>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Record'">
-                  <app-record [item]="item"></app-record>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'Collect'">
-                  <app-collect [item]="item"></app-collect>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'ExternalService'">
-                  <app-external-service [item]="item"></app-external-service>
-                </ng-template>
-                <ng-template [ngSwitchCase]="'HangUp'">
-                  <app-hung-up [item]="item"></app-hung-up>
-                </ng-template>
-                <div *ngSwitchDefault>{{ item.text }}</div>
-              </ng-container>
+              
             </div>
           </div>
         </div>
